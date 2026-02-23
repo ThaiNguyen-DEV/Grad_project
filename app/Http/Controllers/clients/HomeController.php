@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\clients\Home;
 use App\Models\clients\Tours;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -28,7 +29,7 @@ class HomeController extends Controller
 
         $userId = $this->getUserId();
         if ($userId) {
-            
+
             // Gọi API Python để lấy danh sách tour được gợi ý cho từng người dùng 
             try {
                 $apiUrl = 'http://127.0.0.1:5555/api/user-recommendations';
@@ -44,24 +45,21 @@ class HomeController extends Controller
             } catch (\Exception $e) {
                 // Xử lý lỗi khi gọi API
                 $tourIds = [];
-                \Log::error('Lỗi khi gọi API liên quan: ' . $e->getMessage());
+                Log::error('Lỗi khi gọi API liên quan: ' . $e->getMessage());
             }
 
             $toursPopular = $this->tours->toursRecommendation($tourIds);
 
             if (empty($tourIds)) {
                 $toursPopular = $this->tours->toursPopular(6);
-                
             }
 
             // dd($toursPopular);
-        }else {
+        } else {
             $toursPopular = $this->tours->toursPopular(6);
         }
 
         // dd($toursPopular);
         return view('clients.home', compact('title', 'tours', 'toursPopular'));
     }
-
-
 }

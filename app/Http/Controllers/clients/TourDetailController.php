@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\clients\Tours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class TourDetailController extends Controller
 {
@@ -36,7 +37,7 @@ class TourDetailController extends Controller
             $checkDisplay = 'hide';
         }
 
-        
+
         // Gọi API Python để lấy danh sách tour liên quan
         try {
             $apiUrl = 'http://127.0.0.1:5555/api/tour-recommendations';
@@ -52,7 +53,7 @@ class TourDetailController extends Controller
         } catch (\Exception $e) {
             // Xử lý lỗi khi gọi API
             $relatedTours = [];
-            \Log::error('Lỗi khi gọi API liên quan: ' . $e->getMessage());
+            Log::error('Lỗi khi gọi API liên quan: ' . $e->getMessage());
         }
 
         $id_toursRe = $relatedTours;
@@ -61,7 +62,7 @@ class TourDetailController extends Controller
         // dd($tourRecommendations);    
         // dd($avgStar);
 
-        return view('clients.tour-detail', compact('title', 'tourDetail', 'getReviews', 'avgStar', 'countReview', 'checkDisplay','tourRecommendations'));
+        return view('clients.tour-detail', compact('title', 'tourDetail', 'getReviews', 'avgStar', 'countReview', 'checkDisplay', 'tourRecommendations'));
     }
 
     public function reviews(Request $req)
