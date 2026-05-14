@@ -622,7 +622,7 @@ $(document).ready(function () {
 
         // Nếu tất cả đều hợp lệ, gửi form
         if (validateBookingForm()) {
-            $(".booking-container").submit();
+            $(".booking-form").submit();
         }
     });
 

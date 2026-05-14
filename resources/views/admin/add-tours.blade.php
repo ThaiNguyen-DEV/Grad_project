@@ -27,21 +27,15 @@
                 <div class="row">
 
                     <div class="col-md-12 col-sm-12 ">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Form</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
+                        <div class="x_panel border-0 shadow-sm" style="border-radius: 12px;">
+                            <div class="x_title border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h2 class="font-weight-bold" style="color: var(--primary-color); font-size: 20px;">Tạo Tour mới</h2>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content add-tours">
+                            <div class="x_content add-tours pt-3">
 
                                 <!-- Smart Wizard -->
-                                <p>Thêm thông tin chi tiết để tạo một tour mới và bắt đầu thu hút khách hàng!</p>
+                                <p class="text-muted mb-4">Thêm thông tin chi tiết để tạo một tour mới và bắt đầu thu hút khách hàng!</p>
                                 <div id="wizard" class="form_wizard wizard_horizontal">
                                     <ul class="wizard_steps">
                                         <li>

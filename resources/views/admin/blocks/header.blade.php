@@ -52,6 +52,8 @@
     <link href="{{ asset('admin/vendors/dropzone/dist/min/dropzone.min.css') }}" rel="stylesheet" />
     {{-- Custom css by DevDien  --}}
     <link href="{{ asset('admin/assets/css/custom-css.css') }}" rel="stylesheet" />
+    {{-- Modern SaaS Admin Theme Override --}}
+    <link href="{{ asset('admin/assets/css/admin-saas.css') }}" rel="stylesheet" />
 </head>
 
 <body class="nav-md">

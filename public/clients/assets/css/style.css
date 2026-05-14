@@ -64,14 +64,14 @@ body {
   font-family: var(--base-font);
   --base-font: 'Outfit', sans-serif;
   --heading-font: 'Outfit', sans-serif;
-  --primary-color: #63AB45;
-  --secondary-color: #F7921E;
-  --heading-color: #1C231F;
-  --base-color: #484848;
-  --lighter-color: #F9F9F7;
-  --border-color: #E9E9E9;
-  --primary-rgb: 99, 171, 69;
-  --secondary-rgb: 247, 146, 30; }
+  --primary-color: #003b95;
+  --secondary-color: #ff5722;
+  --heading-color: #1a1a1a;
+  --base-color: #333333;
+  --lighter-color: #f5f7fa;
+  --border-color: #e5e7eb;
+  --primary-rgb: 0, 59, 149;
+  --secondary-rgb: 255, 87, 34; }
 
 a {
   color: var(--base-color);

@@ -1,3 +1,44 @@
+/* Vietravel Header Styles */
+.header-vietravel .header-top {
+    font-size: 13px;
+}
+.header-vietravel .header-top a:hover {
+    color: var(--primary-color) !important;
+}
+.header-vietravel .header-navigation {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.header-vietravel .custom-nav-links > li > a {
+    position: relative;
+    transition: all 0.3s;
+}
+.header-vietravel .custom-nav-links > li:hover > a,
+.header-vietravel .custom-nav-links > li.active > a {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.header-vietravel .user-dropdown-wrap:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+.header-vietravel .dropdown-menu {
+    transition: all 0.3s;
+}
+.header-search-bar input:focus {
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* Decrease header height by overriding default tall paddings from style.css */
+@media only screen and (min-width: 992px) {
+    .main-menu .navbar-collapse li {
+        padding: 10px 15px !important;
+    }
+    .main-header.fixed-header .main-menu .navbar-collapse > ul > li {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+}
+
 .datetimepicker-custom {
     padding: 0;
 }
@@ -19,20 +60,37 @@
 .dropdown-menu {
     list-style-type: none;
     position: absolute;
-    top: 60px; /* Adjust to the correct position */
+    top: 100%;
     right: 0;
+    margin-top: 5px !important;
 }
+
+/* Hover bridge to prevent losing hover state when moving mouse down */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: transparent;
+}
+
 .menu-sidebar .dropdown-menu {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Thêm box-shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .dropdown-menu li {
     padding: 8px 16px;
     border-bottom: 1px solid var(--border-color);
 }
+
 /* Loại bỏ đường viền dưới cho mục cuối cùng */
 .dropdown-menu li:last-child {
-    border-bottom: none; /* Không có đường viền dưới cho mục cuối cùng */
+    border-bottom: none;
+    /* Không có đường viền dưới cho mục cuối cùng */
 }
+
 .dropdown-menu li:hover {
     background-color: var(--primary-color);
 }
@@ -50,6 +108,7 @@
     height: 100%;
     padding-bottom: 10px;
 }
+
 .tour-gallery .gallery-item img {
     height: 100%;
     border-radius: 8px;
@@ -62,6 +121,7 @@
     display: flex;
     justify-content: end;
 }
+
 .clear_filter {
     color: #fff;
     background-color: var(--bs-green);
@@ -86,6 +146,7 @@
     0% {
         -webkit-transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
     }
@@ -95,25 +156,30 @@
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
 }
 
 .hidden-content {
-    display: none; /* Ẩn nội dung */
+    display: none;
+    /* Ẩn nội dung */
 }
+
 .equal-block-fix {
     display: flex !important;
     flex-direction: column;
     height: 100%;
 }
+
 .equal-content-fix {
     justify-content: space-around;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
 }
+
 /****************************************
 *              PAGE USER PROFILE        *
 * ***************************************/
@@ -297,6 +363,7 @@
         position: sticky;
         top: 50px;
     }
+
     .order-coupon {
         border-top: 1px solid #d6d6d6;
         margin: 20px 0;
@@ -306,10 +373,12 @@
         gap: 2px;
         border-bottom: 1px solid #d6d6d6;
     }
+
     .order-coupon input {
         border-radius: 8px;
         border: 1px solid #e2e4e5;
     }
+
     .btn-submit-booking.inactive {
         background-color: #f3d5b1;
         cursor: not-allowed;
@@ -343,6 +412,7 @@
 .comment-review-wrap .comment-ratting-item .ratting i {
     font-size: 36px;
 }
+
 .ratting i.active {
     color: var(--secondary-color);
 }
@@ -353,8 +423,10 @@
 .tour-title {
     height: 40px;
     line-height: 1.2;
-    overflow: hidden; /* Hide any text that overflows */
-    text-overflow: ellipsis; /* Display "..." if text overflows */
+    overflow: hidden;
+    /* Hide any text that overflows */
+    text-overflow: ellipsis;
+    /* Display "..." if text overflows */
     white-space: nowrap;
 }
 
@@ -366,14 +438,21 @@
     height: 250px;
     overflow-y: auto;
 }
+
 /****************************************
 *             TOUR BOOKED            *
 * ***************************************/
 .truncate-3-lines {
-    display: -webkit-box; /* Sử dụng Flexbox để xử lý text */
-    -webkit-line-clamp: 3; /* Giới hạn số dòng hiển thị */
-    -webkit-box-orient: vertical; /* Thiết lập hướng xử lý theo chiều dọc */
-    overflow: hidden; /* Ẩn phần nội dung vượt quá */
-    text-overflow: ellipsis; /* Thêm dấu ba chấm vào cuối */
-    word-break: break-word; /* Đảm bảo từ không bị tràn ra ngoài */
+    display: -webkit-box;
+    /* Sử dụng Flexbox để xử lý text */
+    -webkit-line-clamp: 3;
+    /* Giới hạn số dòng hiển thị */
+    -webkit-box-orient: vertical;
+    /* Thiết lập hướng xử lý theo chiều dọc */
+    overflow: hidden;
+    /* Ẩn phần nội dung vượt quá */
+    text-overflow: ellipsis;
+    /* Thêm dấu ba chấm vào cuối */
+    word-break: break-word;
+    /* Đảm bảo từ không bị tràn ra ngoài */
 }

@@ -18,33 +18,52 @@
     </div>
 </section>
 <!-- Tour Gallery start -->
-<div class="tour-gallery">
-    <div class="container-fluid">
-        <div class="row gap-10 justify-content-center rel">
-            <div class="col-lg-4 col-md-6">
-                <div class="gallery-item">
-                    <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[0] . '') }}"
-                        alt="Destination">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[1] . '') }}"
-                        alt="Destination">
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="gallery-item gallery-between">
-                    <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[2] . '') }}"
-                        alt="Destination">
+<div class="tour-gallery py-4 bg-light gallery">
+    <div class="container">
+        <div class="row g-2 rounded-4 overflow-hidden shadow-sm" style="height: 400px;">
+            <div class="col-md-6 h-100">
+                <div class="gallery-item h-100 position-relative">
+                    <a href="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[0]) }}" class="d-block w-100 h-100">
+                        <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[0]) }}"
+                            alt="Destination" class="w-100 h-100 object-fit-cover" style="transition: transform 0.5s;">
+                        <div class="overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)); position: absolute; top:0; left:0; right:0; bottom:0;"></div>
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="gallery-item">
-                    <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[3] . '') }}"
-                        alt="Destination">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[4] . '') }}"
-                        alt="Destination">
+            <div class="col-md-6 h-100">
+                <div class="row g-2 h-100">
+                    <div class="col-6 h-50">
+                        <div class="gallery-item h-100">
+                            <a href="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[1]) }}" class="d-block w-100 h-100">
+                                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[1]) }}"
+                                    alt="Destination" class="w-100 h-100 object-fit-cover">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 h-50">
+                        <div class="gallery-item h-100">
+                            <a href="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[2]) }}" class="d-block w-100 h-100">
+                                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[2]) }}"
+                                    alt="Destination" class="w-100 h-100 object-fit-cover">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 h-50">
+                        <div class="gallery-item h-100">
+                            <a href="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[3]) }}" class="d-block w-100 h-100">
+                                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[3]) }}"
+                                    alt="Destination" class="w-100 h-100 object-fit-cover">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 h-50">
+                        <div class="gallery-item h-100 position-relative">
+                            <a href="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[4]) }}" class="d-block w-100 h-100">
+                                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[4]) }}"
+                                    alt="Destination" class="w-100 h-100 object-fit-cover">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,238 +73,214 @@
 
 
 <!-- Tour Header Area start -->
-<section class="tour-header-area pt-70 rel z-1">
+<section class="tour-header-area pt-50 pb-30 bg-white border-bottom">
     <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-xl-6 col-lg-7">
-                <div class="tour-header-content mb-15" data-aos="fade-left" data-aos-duration="1500"
-                    data-aos-offset="50">
-                    <span class="location d-inline-block mb-10"><i class="fal fa-map-marker-alt"></i>
-                        {{ $tourDetail->destination }}</span>
-                    <div class="section-title pb-5">
-                        <h2>{{ $tourDetail->title }}</h2>
+        <div class="row justify-content-between align-items-center">
+            <div class="col-xl-8 col-lg-7">
+                <div class="tour-header-content" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-primary me-2 px-3 py-2 rounded-pill"><i class="fal fa-map-marker-alt me-1"></i> {{ $tourDetail->destination }}</span>
+                        <div class="ratting text-warning">
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($avgStar && $i < $avgStar)
+                                    <i class="fas fa-star"></i>
+                                @else
+                                    <i class="far fa-star"></i>
+                                @endif
+                            @endfor
+                            <span class="text-muted ms-1 fs-6">({{ $avgStar ? number_format($avgStar, 1) : 0 }} sao)</span>
+                        </div>
                     </div>
-                    <div class="ratting">
-                        @for ($i = 0; $i < 5; $i++)
-                            @if ($avgStar && $i < $avgStar)
-                                <i class="fas fa-star"></i>
-                            @else
-                                <i class="far fa-star"></i>
-                            @endif
-                        @endfor
-
-                    </div>
+                    <h2 class="fw-bold mb-0 text-dark">{{ $tourDetail->title }}</h2>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-5 text-lg-end" data-aos="fade-right" data-aos-duration="1500"
-                data-aos-offset="50">
-                <div class="tour-header-social mb-10">
-                    <a href="#"><i class="far fa-share-alt"></i>Share tours</a>
-                    <a href="#"><i class="fas fa-heart bgc-secondary"></i>Wish list</a>
+            <div class="col-xl-4 col-lg-5 text-lg-end mt-4 mt-lg-0" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+                <div class="tour-header-social d-flex justify-content-lg-end gap-2">
+                    <button class="btn btn-outline-secondary rounded-pill px-4"><i class="far fa-share-alt me-2"></i>Chia sẻ</button>
+                    <button class="btn btn-outline-danger rounded-pill px-4"><i class="far fa-heart me-2"></i>Yêu thích</button>
                 </div>
             </div>
         </div>
-        <hr class="mt-50 mb-70">
     </div>
 </section>
 <!-- Tour Header Area end -->
 
 
 <!-- Tour Details Area start -->
-<section class="tour-details-page pb-100">
+<section class="tour-details-page py-80 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="tour-details-content">
-                    <h3>Khám phá Tours</h3>
-                    <p>{!! $tourDetail->description !!} </p>
-                    <div class="row pb-55">
-                        <div class="col-md-6">
-                            <div class="tour-include-exclude mt-30">
-                                <h5>Bao gồm và không bao gồm</h5>
-                                <ul class="list-style-one check mt-25">
-                                    <li><i class="far fa-check"></i> Dịch vụ đón và trả khách</li>
-                                    <li><i class="far fa-check"></i> 1 bữa ăn mỗi ngày</li>
-                                    <li><i class="far fa-check"></i> Bữa tối trên du thuyền & Sự kiện âm nhạc</li>
-                                    <li><i class="far fa-check"></i> Tham quan 7 địa điểm tuyệt vời nhất trong thành phố
-                                    </li>
-                                    <li><i class="far fa-check"></i> Nước đóng chai trên xe buýt</li>
-                                    <li><i class="far fa-check"></i> Phương tiện di chuyển Xe buýt du lịch hạng sang
-                                    </li>
+                <div class="tour-details-content bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                    <h4 class="fw-bold mb-4 pb-2 border-bottom text-primary">Tổng quan hành trình</h4>
+                    <div class="text-muted" style="line-height: 1.8;">
+                        <p>{!! $tourDetail->description !!}</p>
+                    </div>
+                    
+                    <div class="row pt-4 pb-2">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="tour-include bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold text-success mb-3"><i class="fal fa-check-circle me-2"></i>Bao gồm</h5>
+                                <ul class="list-unstyled mb-0 text-muted" style="line-height: 2;">
+                                    <li><i class="fas fa-check text-success me-2" style="font-size: 12px;"></i> Dịch vụ đón và trả khách</li>
+                                    <li><i class="fas fa-check text-success me-2" style="font-size: 12px;"></i> 1 bữa ăn mỗi ngày</li>
+                                    <li><i class="fas fa-check text-success me-2" style="font-size: 12px;"></i> Tham quan các địa điểm nổi bật</li>
+                                    <li><i class="fas fa-check text-success me-2" style="font-size: 12px;"></i> Nước đóng chai trên xe buýt</li>
+                                    <li><i class="fas fa-check text-success me-2" style="font-size: 12px;"></i> Di chuyển Xe du lịch hạng sang</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="tour-include-exclude mt-30">
-                                <h5>Không bao gồm</h5>
-                                <ul class="list-style-one mt-25">
-                                    <li><i class="far fa-times"></i> Tiền boa</li>
-                                    <li><i class="far fa-times"></i> Đón và trả khách tại khách sạn</li>
-                                    <li><i class="far fa-times"></i> Bữa trưa, Đồ ăn & Đồ uống</li>
-                                    <li><i class="far fa-times"></i> Nâng cấp tùy chọn lên một ly</li>
-                                    <li><i class="far fa-times"></i> Dịch vụ bổ sung</li>
-                                    <li><i class="far fa-times"></i> Bảo hiểm</li>
+                            <div class="tour-exclude bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold text-danger mb-3"><i class="fal fa-times-circle me-2"></i>Không bao gồm</h5>
+                                <ul class="list-unstyled mb-0 text-muted" style="line-height: 2;">
+                                    <li><i class="fas fa-times text-danger me-2" style="font-size: 12px;"></i> Tiền TIP cho HDV</li>
+                                    <li><i class="fas fa-times text-danger me-2" style="font-size: 12px;"></i> Chi phí cá nhân</li>
+                                    <li><i class="fas fa-times text-danger me-2" style="font-size: 12px;"></i> Dịch vụ bổ sung ngoài chương trình</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h3>Lịch trình</h3>
-                <div class="accordion-two mt-25 mb-60" id="faq-accordion-two">
-                    @php
-                        $day = 1;
-                    @endphp
-                    @foreach ($tourDetail->timeline as $timeline)
-                        <div class="accordion-item">
-                            <h5 class="accordion-header">
-                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo{{ $timeline->timeLineId }}">
-                                    Ngày {{ $day++ }} - {{ $timeline->title }}
-                                </button>
-                            </h5>
-                            <div id="collapseTwo{{ $timeline->timeLineId }}" class="accordion-collapse collapse"
-                                data-bs-parent="#faq-accordion-two">
-                                <div class="accordion-body">
-                                    <p>{!! $timeline->description !!}</p>
+
+                <div class="tour-timeline bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                    <h4 class="fw-bold mb-4 pb-2 border-bottom text-primary">Chương trình Tour</h4>
+                    <div class="accordion accordion-flush" id="faq-accordion-two">
+                        @php $day = 1; @endphp
+                        @foreach ($tourDetail->timeline as $index => $timeline)
+                            <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+                                <h5 class="accordion-header">
+                                    <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }} fw-bold bg-light" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo{{ $timeline->timeLineId }}">
+                                        <span class="badge bg-primary me-3">Ngày {{ $day++ }}</span> {{ $timeline->title }}
+                                    </button>
+                                </h5>
+                                <div id="collapseTwo{{ $timeline->timeLineId }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                                    data-bs-parent="#faq-accordion-two">
+                                    <div class="accordion-body text-muted" style="line-height: 1.8;">
+                                        <p>{!! $timeline->description !!}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
 
-                <div id="partials_reviews">
-                    @include('clients.partials.reviews')
+                <div class="tour-reviews bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                    <h4 class="fw-bold mb-4 pb-2 border-bottom text-primary">Đánh giá từ khách hàng</h4>
+                    <div id="partials_reviews">
+                        @include('clients.partials.reviews')
+                    </div>
+
+                    <div class="{{ $checkDisplay }} mt-5 pt-4 border-top">
+                        <h5 class="fw-bold mb-3">Viết đánh giá của bạn</h5>
+                        <form id="comment-form" class="comment-form bg-light p-4 rounded-3"
+                            name="review-form" action="{{ route('reviews') }}" method="post" data-aos="fade-up"
+                            data-aos-duration="1500" data-aos-offset="50">
+                            @csrf
+                            <div class="comment-review-wrap mb-4">
+                                <span class="fw-bold d-block mb-2">Chất lượng:</span>
+                                <div class="ratting text-warning fs-5" id="rating-stars" style="cursor: pointer;">
+                                    <i class="far fa-star" data-value="1"></i>
+                                    <i class="far fa-star" data-value="2"></i>
+                                    <i class="far fa-star" data-value="3"></i>
+                                    <i class="far fa-star" data-value="4"></i>
+                                    <i class="far fa-star" data-value="5"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-group mb-3">
+                                        <label for="message" class="fw-bold mb-2">Chia sẻ trải nghiệm của bạn</label>
+                                        <textarea name="message" id="message" class="form-control rounded-3" rows="4" placeholder="Nội dung đánh giá..." required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold" id="submit-reviews"
+                                        data-url-checkBooking="{{ route('checkBooking') }}"
+                                        data-tourId-reviews="{{ $tourDetail->tourId }}">
+                                        Gửi Đánh Giá <i class="fal fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <h3 class="{{ $checkDisplay }}">Thêm Đánh giá</h3>
-                <form id="comment-form" class="comment-form bgc-lighter z-1 rel mt-30 {{ $checkDisplay }}"
-                    name="review-form" action="{{ route('reviews') }}" method="post" data-aos="fade-up"
-                    data-aos-duration="1500" data-aos-offset="50">
-                    @csrf
-                    <div class="comment-review-wrap">
-                        <div class="comment-ratting-item">
-                            <span class="title">Đánh giá</span>
-                            <div class="ratting" id="rating-stars">
-                                <i class="far fa-star" data-value="1"></i>
-                                <i class="far fa-star" data-value="2"></i>
-                                <i class="far fa-star" data-value="3"></i>
-                                <i class="far fa-star" data-value="4"></i>
-                                <i class="far fa-star" data-value="5"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                    <hr class="mt-30 mb-40">
-                    <h5>Để lại phản hồi</h5>
-                    <div class="row gap-20 mt-20">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="message">Nội dung</label>
-                                <textarea name="message" id="message" class="form-control" rows="5" required=""></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group mb-0">
-                                <button type="submit" class="theme-btn bgc-secondary style-two" id="submit-reviews"
-                                    data-url-checkBooking="{{ route('checkBooking') }}"
-                                    data-tourId-reviews="{{ $tourDetail->tourId }}">
-                                    <span data-hover="Gửi đánh giá">Gửi đánh giá</span>
-                                    <i class="fal fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
             </div>
-            <div class="col-lg-4 col-md-8 col-sm-10 rmt-75">
-                <div class="blog-sidebar tour-sidebar">
 
-                    <div class="widget widget-booking" data-aos="fade-up" data-aos-duration="1500"
-                        data-aos-offset="50">
-                        <h5 class="widget-title">Tour Booking</h5>
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <div class="sidebar-sticky" style="position: sticky; top: 120px;">
+                    <div class="widget widget-booking bg-white p-4 rounded-4 shadow-sm mb-4 border-top border-4 border-primary">
+                        <h4 class="fw-bold mb-4 text-center">Đặt Tour Ngay</h4>
+                        <div class="price-tag text-center mb-4">
+                            <span class="d-block text-muted fs-6 mb-1">Giá chỉ từ</span>
+                            <h3 class="text-primary fw-bold mb-0">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} <span class="fs-6 text-muted fw-normal">VND</span></h3>
+                        </div>
+                        
                         <form action="{{ route('booking', ['id' => $tourDetail->tourId]) }}" method="POST">
                             @csrf
-                            <div class="date mb-25">
-                                <b>Ngày bắt đầu</b>
-                                <input type="text" value="{{ date('d-m-Y', strtotime($tourDetail->startDate)) }}"
-                                    name="startdate" disabled>
+                            <div class="bg-light p-3 rounded-3 mb-4">
+                                <div class="row g-3">
+                                    <div class="col-6 border-end">
+                                        <small class="text-muted d-block fw-bold mb-1">Khởi hành</small>
+                                        <span class="fw-600 text-dark">{{ date('d/m/Y', strtotime($tourDetail->startDate)) }}</span>
+                                        <input type="hidden" name="startdate" value="{{ $tourDetail->startDate }}">
+                                    </div>
+                                    <div class="col-6 pl-3">
+                                        <small class="text-muted d-block fw-bold mb-1">Kết thúc</small>
+                                        <span class="fw-600 text-dark">{{ date('d/m/Y', strtotime($tourDetail->endDate)) }}</span>
+                                        <input type="hidden" name="enddate" value="{{ $tourDetail->endDate }}">
+                                    </div>
+                                </div>
                             </div>
-                            <hr>
-                            <div class="date mb-25">
-                                <b>Ngày kết thúc</b>
-                                <input type="text" value="{{ date('d-m-Y', strtotime($tourDetail->endDate)) }}"
-                                    name="enddate" disabled>
+
+                            <div class="time-duration mb-4 text-center">
+                                <span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill fs-6"><i class="fal fa-clock me-2"></i>{{ $tourDetail->time }}</span>
+                                <input type="hidden" name="time" value="{{ $tourDetail->time }}">
                             </div>
-                            <hr>
-                            <div class="time py-5">
-                                <b>Thời gian :</b>
-                                <p>{{ $tourDetail->time }}</p>
-                                <input type="hidden" name="time">
+
+                            <div class="ticket-types mb-4">
+                                <h6 class="fw-bold mb-3 border-bottom pb-2">Bảng Giá</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="text-dark">Người lớn</span>
+                                    <span class="fw-bold">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} đ</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-dark">Trẻ em</span>
+                                    <span class="fw-bold">{{ number_format($tourDetail->priceChild, 0, ',', '.') }} đ</span>
+                                </div>
                             </div>
-                            <hr class="mb-25">
-                            <h6>Vé:</h6>
-                            <ul class="tickets clearfix">
-                                <li>
-                                    Người lớn <span
-                                        class="price">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} VND
-                                    </span>
-                                </li>
-                                <li>
-                                    Trẻ em <span
-                                        class="price">{{ number_format($tourDetail->priceChild, 0, ',', '.') }} VND
-                                    </span>
-                                </li>
-                            </ul>
-                            <button type="submit" class="theme-btn style-two w-100 mt-15 mb-5">
-                                <span data-hover="Đặt ngay">Đặt ngay</span>
-                                <i class="fal fa-arrow-right"></i>
+
+                            <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm mb-3 text-uppercase fs-6">
+                                Đặt Chỗ Ngay <i class="fal fa-arrow-right ms-2"></i>
                             </button>
+                            
                             <div class="text-center">
-                                <a href="{{ route('contact') }}">Bạn cần trợ giúp không?</a>
+                                <a href="{{ route('contact') }}" class="text-muted text-decoration-none" style="font-size: 14px;"><i class="fal fa-info-circle me-1"></i> Cần tư vấn thêm? Liên hệ</a>
                             </div>
                         </form>
                     </div>
 
-                    <div class="widget widget-contact" data-aos="fade-up" data-aos-duration="1500"
-                        data-aos-offset="50">
-                        <h5 class="widget-title">Cần trợ giúp?</h5>
-                        <ul class="list-style-one">
-                            <li><i class="far fa-envelope"></i> <a
-                                    href="emilto:minhdien.dev@gmail.com">minhdien.dev@gmail.com</a></li>
-                            <li><i class="far fa-phone-volume"></i> <a href="callto:+000(123)45688">+000 (123) 456
-                                    88</a></li>
-                        </ul>
-                    </div>
                     @if (!empty($tourRecommendations))
-                        <div class="widget widget-tour" data-aos="fade-up" data-aos-duration="1500"
-                            data-aos-offset="50">
-                            <h6 class="widget-title">Tours tương tự</h6>
+                        <div class="widget widget-tour bg-white p-4 rounded-4 shadow-sm">
+                            <h5 class="fw-bold mb-4 pb-2 border-bottom">Có Thể Bạn Quan Tâm</h5>
                             @foreach ($tourRecommendations as $tour)
-                                <div class="destination-item tour-grid style-three bgc-lighter">
-                                    <div class="image">
-                                        {{-- <span class="badge">10% Off</span> --}}
+                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                                    <div class="image me-3" style="width: 80px; height: 80px; border-radius: 10px; overflow: hidden; flex-shrink: 0;">
                                         <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0]) }}"
-                                            alt="Tour" style="max-height: 137px">
+                                            alt="Tour" class="w-100 h-100 object-fit-cover">
                                     </div>
                                     <div class="content">
-                                        <div class="destination-header">
-                                            <span class="location"><i class="fal fa-map-marker-alt"></i>
-                                                {{ $tour->destination }}</span>
-                                            <div class="ratting">
-                                                <i class="fas fa-star"></i>
-                                                <span>({{ $tour->rating }})</span>
-                                            </div>
-                                        </div>
-                                        <h6><a
-                                                href="{{ route('tour-detail', ['id' => $tour->tourId]) }}">{{ $tour->title }}</a>
+                                        <h6 class="mb-1" style="line-height: 1.4; font-size: 14px;">
+                                            <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="text-dark text-decoration-none">{{ $tour->title }}</a>
                                         </h6>
+                                        <span class="text-primary fw-bold" style="font-size: 14px;">{{ number_format($tour->priceAdult, 0, ',', '.') }} đ</span>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     @endif
-
                 </div>
             </div>
         </div>

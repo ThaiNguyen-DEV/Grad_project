@@ -15,20 +15,14 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="x_panel">
-                            <div class="invoice_booking">
-                                <div class="x_title">
-                                    <h2>Hóa đơn chi tiết</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                        <div class="x_panel border-0 shadow-sm" style="border-radius: 12px;">
+                            <div class="invoice_booking p-3">
+                                <div class="x_title border-0 pb-0 d-flex justify-content-between align-items-center mb-4">
+                                    <h2 class="font-weight-bold" style="color: var(--primary-color); font-size: 20px;"><i class="fa fa-file-text-o me-2"></i> Hóa đơn chi tiết</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <section class="content invoice">
+                                    <section class="content invoice bg-light p-4 rounded-3 shadow-sm border">
                                         <!-- title row -->
                                         <div class="row">
                                             <div class="  invoice-header">

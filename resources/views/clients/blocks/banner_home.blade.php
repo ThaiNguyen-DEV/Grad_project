@@ -1,59 +1,79 @@
 <!-- Hero Area Start -->
-<section class="hero-area bgc-black pt-200 rpt-120 rel z-2">
-    <div class="container-fluid">
-        <h1 class="hero-title" data-aos="flip-up" data-aos-delay="50" data-aos-duration="1500" data-aos-offset="50">
-            LOTUSMILE</h1>
-        <div class="main-hero-image bgs-cover"
-            style="background-image: url({{ asset('clients/assets/images/banner/danang.jpg') }});">
-        </div>
-    </div>
-    <form action="{{ route('search') }}" method="GET" id="search_form">
-        <div class="container container-1400">
-            <div class="search-filter-inner" data-aos="zoom-out-down" data-aos-duration="1500" data-aos-offset="50">
-                <div class="filter-item clearfix">
-                    <div class="icon"><i class="fal fa-map-marker-alt"></i></div>
-                    <span class="title">Điểm đến</span>
-                    <select name="destination" id="destination">
-                        <option value="">Chọn điểm đến</option>
-                        <option value="dn">Đà Nẵng</option>
-                        <option value="cd">Côn Đảo</option>
-                        <option value="hn">Hà Nội</option>
-                        <option value="hcm">TP. Hồ Chí Minh</option>
-                        <option value="hl">Hạ Long</option>
-                        <option value="nb">Ninh Bình</option>
-                        <option value="pq">Phú Quốc</option>
-                        <option value="dl">Đà Lạt</option>
-                        <option value="qt">Quảng Trị</option>
-                        <option value="kh">Khánh Hòa (Nha Trang)</option>
-                        <option value="ct">Cần Thơ</option>
-                        <option value="vt">Vũng Tàu</option>
-                        <option value="qn">Quảng Ninh</option>
-                        <option value="la">Lào Cai (Sa Pa)</option>
-                        <option value="bd">Bình Định (Quy Nhơn)</option>
-                    </select>
-                    
-                </div>
-                <div class="filter-item clearfix">
-                    <div class="icon"><i class="fal fa-calendar-alt"></i></div>
-                    <span class="title">Ngày khởi hành</span>
-                    <input type="text" id="start_date" name="start_date" class="datetimepicker datetimepicker-custom"
-                        placeholder="Chọn ngày đi" readonly>
-                </div>
-                <div class="filter-item clearfix">
-                    <div class="icon"><i class="fal fa-calendar-alt"></i></div>
-                    <span class="title">Ngày kết thúc</span>
-                    <input type="text" id="end_date" name="end_date" class="datetimepicker datetimepicker-custom"
-                        placeholder="Chọn ngày về" readonly>
-                </div>
-                <div class="search-button">
-                    <button class="theme-btn" type="submit">
-                        <span data-hover="Tìm kiếm">Tìm kiếm</span>
-                        <i class="far fa-search"></i>
-                    </button>
+<section class="hero-area pt-150 pb-100 rel z-2" style="background-color: var(--lighter-color);">
+    <div class="container-fluid px-0">
+        <div class="main-hero-image bgs-cover position-relative"
+            style="background-image: url({{ asset('clients/assets/images/banner/danang.jpg') }}); height: 500px; border-radius: 0 0 30px 30px; overflow: hidden;">
+            <div class="overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%); position: absolute; top:0; left:0; right:0; bottom:0;"></div>
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 position-relative z-3">
+                        <h1 class="text-white mb-3 fw-bold" data-aos="fade-up" data-aos-duration="1000" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Đồng hành cùng bạn trên mọi nẻo đường</h1>
+                        <p class="text-white fs-5 mb-0" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Khám phá thế giới với các tour du lịch đa dạng và hấp dẫn</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+    
+    <div class="container position-relative z-3" style="margin-top: -60px;">
+        <div class="bg-white rounded-4 shadow-lg p-4" data-aos="zoom-in-up" data-aos-duration="1000">
+            <!-- Tabs (Mockup for future extensions) -->
+            <ul class="nav nav-pills mb-4 border-bottom pb-3">
+                <li class="nav-item">
+                    <a class="nav-link active rounded-pill px-4 fw-600" aria-current="page" href="#" style="background-color: var(--primary-color);">
+                        <i class="fas fa-suitcase-rolling me-2"></i>Tour trọn gói
+                    </a>
+                </li>
+            </ul>
 
+            <form action="{{ route('search') }}" method="GET" id="search_form">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label text-muted fw-bold mb-1" style="font-size: 13px;">Điểm đến</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="fal fa-map-marker-alt"></i></span>
+                            <select name="destination" id="destination" class="form-select border-start-0 ps-0 shadow-none fw-500" style="cursor: pointer; height: 50px;">
+                                <option value="">Bạn muốn đi đâu?</option>
+                                <option value="dn">Đà Nẵng</option>
+                                <option value="cd">Côn Đảo</option>
+                                <option value="hn">Hà Nội</option>
+                                <option value="hcm">TP. Hồ Chí Minh</option>
+                                <option value="hl">Hạ Long</option>
+                                <option value="nb">Ninh Bình</option>
+                                <option value="pq">Phú Quốc</option>
+                                <option value="dl">Đà Lạt</option>
+                                <option value="qt">Quảng Trị</option>
+                                <option value="kh">Khánh Hòa (Nha Trang)</option>
+                                <option value="ct">Cần Thơ</option>
+                                <option value="vt">Vũng Tàu</option>
+                                <option value="qn">Quảng Ninh</option>
+                                <option value="la">Lào Cai (Sa Pa)</option>
+                                <option value="bd">Bình Định (Quy Nhơn)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted fw-bold mb-1" style="font-size: 13px;">Ngày khởi hành</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="fal fa-calendar-alt"></i></span>
+                            <input type="text" id="start_date" name="start_date" class="form-control border-start-0 ps-0 shadow-none datetimepicker datetimepicker-custom fw-500" placeholder="Chọn ngày đi" readonly style="height: 50px; background-color: white;">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted fw-bold mb-1" style="font-size: 13px;">Ngày kết thúc</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="fal fa-calendar-alt"></i></span>
+                            <input type="text" id="end_date" name="end_date" class="form-control border-start-0 ps-0 shadow-none datetimepicker datetimepicker-custom fw-500" placeholder="Chọn ngày về" readonly style="height: 50px; background-color: white;">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn w-100 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center" type="submit" style="background-color: var(--secondary-color); color: white; height: 50px; transition: all 0.3s;">
+                            <i class="far fa-search me-2"></i> TÌM KIẾM
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 <!-- Hero Area End -->

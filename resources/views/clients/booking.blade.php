@@ -1,161 +1,249 @@
 @include('clients.blocks.header')
 @include('clients.blocks.banner')
 
-<section class="container" style="margin-top:50px; margin-bottom: 100px">
-    {{-- <h1 class="text-center booking-header">Tổng Quan Về Chuyến Đi</h1> --}}
-
-    <form action="{{ route('create-booking') }}" method="post" class="booking-container">
-        @csrf
-        <!-- Contact Information -->
-        <div class="booking-info">
-            <h2 class="booking-header">Thông Tin Liên Lạc</h2>
-            <div class="booking__infor">
-                <div class="form-group">
-                    <label for="username">Họ và tên*</label>
-                    <input type="text" id="username" placeholder="Nhập Họ và tên" name="fullName" required>
-                    <span class="error-message" id="usernameError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email*</label>
-                    <input type="email" id="email" placeholder="sample@gmail.com" name="email" required>
-                    <span class="error-message" id="emailError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="tel">Số điện thoại*</label>
-                    <input type="number" id="tel" placeholder="Nhập số điện thoại liên hệ" name="tel"
-                        required>
-                    <span class="error-message" id="telError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="address">Địa chỉ*</label>
-                    <input type="text" id="address" placeholder="Nhập địa chỉ liên hệ" name="address" required>
-                    <span class="error-message" id="addressError"></span>
-                </div>
-
-            </div>
-
-
-            <!-- Passenger Details -->
-            <h2 class="booking-header">Hành Khách</h2>
-
-            <div class="booking__quantity">
-                <div class="form-group quantity-selector">
-                    <label>Người lớn</label>
-                    <div class="input__quanlity">
-                        <button type="button" class="quantity-btn">-</button>
-                        <input type="number" class="quantity-input" value="1" min="1" id="numAdults"
-                            name="numAdults" data-price-adults="{{ $tour->priceAdult }}" readonly>
-                        <button type="button" class="quantity-btn">+</button>
+<section class="booking-page py-80 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold text-primary mb-3">Xác Nhận Đặt Tour</h2>
+                <div class="d-flex justify-content-center align-items-center mb-4">
+                    <div class="step active text-center me-4">
+                        <div class="step-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;"><i class="fal fa-user"></i></div>
+                        <span class="fw-bold" style="font-size: 14px;">1. Thông tin</span>
                     </div>
-                </div>
-
-                <div class="form-group quantity-selector">
-                    <label>Trẻ em</label>
-                    <div class="input__quanlity">
-                        <button type="button" class="quantity-btn">-</button>
-                        <input type="number" class="quantity-input" value="0" min="0" id="numChildren"
-                            name="numChildren" data-price-children="{{ $tour->priceChild }}" readonly>
-                        <button type="button" class="quantity-btn">+</button>
+                    <div class="step text-center me-4" style="opacity: 0.5;">
+                        <div class="step-icon bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;"><i class="fal fa-credit-card"></i></div>
+                        <span class="fw-bold" style="font-size: 14px;">2. Thanh toán</span>
+                    </div>
+                    <div class="step text-center" style="opacity: 0.5;">
+                        <div class="step-icon bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 40px; height: 40px;"><i class="fal fa-check"></i></div>
+                        <span class="fw-bold" style="font-size: 14px;">3. Hoàn tất</span>
                     </div>
                 </div>
             </div>
-            <!-- Privacy Agreement Section -->
-            <div class="privacy-section">
-                <p>Bằng cách nhấp chuột vào nút "ĐỒNG Ý" dưới đây, Khách hàng đồng ý rằng các điều kiện điều khoản
-                    này sẽ được áp dụng. Vui lòng đọc kỹ điều kiện điều khoản trước khi lựa chọn sử dụng dịch vụ của
-                    LOTUSMILE.</p>
-                <div class="privacy-checkbox">
-                    <input type="checkbox" id="agree" name="agree" required>
-                    <label for="agree">Tôi đã đọc và đồng ý với <a href="#" target="_blank">Điều khoản thanh
-                            toán</a></label>
-                </div>
-            </div>
-            <!-- Payment Method -->
-            <h2 class="booking-header">Phương Thức Thanh Toán</h2>
-
-            <label class="payment-option">
-                <input type="radio" name="payment" value="office-payment" required>
-                <img src="{{ asset('clients/assets/images/contact/icon.png') }}" alt="Office Payment">
-                Thanh toán tại văn phòng
-            </label>
-
-            <label class="payment-option">
-                <input type="radio" name="payment" value="paypal-payment" required>
-                <img src="{{ asset('clients/assets/images/booking/cong-thanh-toan-paypal.jpg') }}" alt="PayPal">
-                Thanh toán bằng PayPal
-            </label>
-
-            <label class="payment-option">
-                <input type="radio" name="payment" value="momo-payment" required>
-                <img src="{{ asset('clients/assets/images/booking/thanh-toan-momo.jpg') }}" alt="MoMo">
-                Thanh toán bằng Momo
-                @if (!is_null($transIdMomo))
-                    <input type="hidden" name="transactionIdMomo" value="{{ $transIdMomo }}">
-                @endif
-            </label>
-
-            <input type="hidden" name="payment_hidden" id="payment_hidden">
         </div>
 
-        <!-- Order Summary -->
-        <div class="booking-summary">
-            <div class="summary-section">
-                <div>
-                    <p>Mã tour : {{ $tour->tourId }}</p>
-                    <input type="hidden" name="tourId" id="tourId" value="{{ $tour->tourId }}">
-                    <h5 class="widget-title">{{ $tour->title }}</h5>
-                    <p>Ngày khởi hành : {{ date('d-m-Y', strtotime($tour->startDate)) }}</p>
-                    <p>Ngày kết thúc : {{ date('d-m-Y', strtotime($tour->endDate)) }}</p>
-                    <p class="quantityAvailable">Số chỗ còn nhận : {{ $tour->quantity }}</p>
-                </div>
-
-                <div class="order-summary">
-                    <div class="summary-item">
-                        <span>Người lớn:</span>
-                        <div>
-                            <span class="quantity__adults">1</span>
-                            <span>X</span>
-                            <span class="total-price">0 VNĐ</span>
+        <form action="{{ route('create-booking') }}" method="post" class="booking-form">
+            @csrf
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Contact Information -->
+                    <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                        <h4 class="fw-bold mb-4 pb-2 border-bottom text-primary"><i class="fal fa-id-card me-2"></i>Thông Tin Liên Lạc</h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="username" class="fw-bold mb-2">Họ và tên <span class="text-danger">*</span></label>
+                                    <input type="text" id="username" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập Họ và tên" name="fullName" required>
+                                    <span class="error-message text-danger" id="usernameError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="email" class="fw-bold mb-2">Email <span class="text-danger">*</span></label>
+                                    <input type="email" id="email" class="form-control rounded-3 p-3 bg-light border-0" placeholder="sample@gmail.com" name="email" required>
+                                    <span class="error-message text-danger" id="emailError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="tel" class="fw-bold mb-2">Số điện thoại <span class="text-danger">*</span></label>
+                                    <input type="number" id="tel" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập số điện thoại" name="tel" required>
+                                    <span class="error-message text-danger" id="telError"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="address" class="fw-bold mb-2">Địa chỉ <span class="text-danger">*</span></label>
+                                    <input type="text" id="address" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập địa chỉ" name="address" required>
+                                    <span class="error-message text-danger" id="addressError"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="summary-item">
-                        <span>Trẻ em:</span>
-                        <div>
-                            <span class="quantity__children">0</span>
-                            <span>X</span>
-                            <span class="total-price">0 VNĐ</span>
+
+                    <!-- Passenger Details -->
+                    <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                        <h4 class="fw-bold mb-4 pb-2 border-bottom text-primary"><i class="fal fa-users me-2"></i>Hành Khách</h4>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light rounded-4 d-flex flex-column justify-content-between h-100 border border-light-subtle shadow-sm transition-hover quantity-selector">
+                                    <div class="mb-3 d-flex align-items-center">
+                                        <div class="bg-white p-2 rounded-circle shadow-sm me-3 text-primary d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                            <i class="fal fa-user-tie fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-1 text-dark">Người lớn</h6>
+                                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle">> 12 tuổi</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-auto" style="width: 100%; max-width: 200px; margin: 0 auto;">
+                                        <button type="button" class="btn btn-outline-primary quantity-btn fw-bold px-3 shadow-sm" style="border-radius: 20px 0 0 20px;">-</button>
+                                        <input type="number" class="form-control text-center fw-bold text-dark border-primary quantity-input px-0 shadow-sm" value="1" min="1" id="numAdults" name="numAdults" data-price-adults="{{ $tour->priceAdult }}" readonly style="background-color: #f8f9fa;">
+                                        <button type="button" class="btn btn-outline-primary quantity-btn fw-bold px-3 shadow-sm" style="border-radius: 0 20px 20px 0;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light rounded-4 d-flex flex-column justify-content-between h-100 border border-light-subtle shadow-sm transition-hover quantity-selector">
+                                    <div class="mb-3 d-flex align-items-center">
+                                        <div class="bg-white p-2 rounded-circle shadow-sm me-3 text-info d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                            <i class="fal fa-child fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-1 text-dark">Trẻ em</h6>
+                                            <span class="badge bg-info-subtle text-info border border-info-subtle">Từ 5 - 11 tuổi</span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-auto" style="width: 100%; max-width: 200px; margin: 0 auto;">
+                                        <button type="button" class="btn btn-outline-info quantity-btn fw-bold px-3 shadow-sm" style="border-radius: 20px 0 0 20px;">-</button>
+                                        <input type="number" class="form-control text-center fw-bold text-dark border-info quantity-input px-0 shadow-sm" value="0" min="0" id="numChildren" name="numChildren" data-price-children="{{ $tour->priceChild }}" readonly style="background-color: #f8f9fa;">
+                                        <button type="button" class="btn btn-outline-info quantity-btn fw-bold px-3 shadow-sm" style="border-radius: 0 20px 20px 0;">+</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="summary-item">
-                        <span>Giảm giá:</span>
-                        <div>
-                            <span class="total-price">0 VNĐ</span>
+
+                    <!-- Payment Method -->
+                    <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                        <h4 class="fw-bold mb-4 pb-2 border-bottom text-primary"><i class="fal fa-wallet me-2"></i>Phương Thức Thanh Toán</h4>
+
+                        <div class="payment-methods">
+                            <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input fs-5" type="radio" name="payment" value="office-payment" required>
+                                    </div>
+                                    <img src="{{ asset('clients/assets/images/contact/icon.png') }}" alt="Office Payment" class="mx-3 rounded" style="width: 40px; height: 40px; object-fit: contain;">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Thanh toán tại văn phòng</h6>
+                                        <span class="text-muted" style="font-size: 13px;">Thanh toán trực tiếp tại văn phòng LOTUSMILE</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input fs-5" type="radio" name="payment" value="paypal-payment" required>
+                                    </div>
+                                    <img src="{{ asset('clients/assets/images/booking/cong-thanh-toan-paypal.jpg') }}" alt="PayPal" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Thanh toán bằng PayPal</h6>
+                                        <span class="text-muted" style="font-size: 13px;">Thanh toán an toàn qua cổng PayPal</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input fs-5" type="radio" name="payment" value="momo-payment" required>
+                                    </div>
+                                    <img src="{{ asset('clients/assets/images/booking/thanh-toan-momo.jpg') }}" alt="MoMo" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">Thanh toán bằng Momo</h6>
+                                        <span class="text-muted" style="font-size: 13px;">Thanh toán tiện lợi qua ví điện tử MoMo</span>
+                                    </div>
+                                </div>
+                                @if (!is_null($transIdMomo))
+                                <input type="hidden" name="transactionIdMomo" value="{{ $transIdMomo }}">
+                                @endif
+                            </label>
+
+                            <input type="hidden" name="payment_hidden" id="payment_hidden">
                         </div>
                     </div>
-                    <div class="summary-item total-price">
-                        <span>Tổng cộng:</span>
-                        <span>0 VNĐ</span>
-                        <input type="hidden" class="totalPrice" name="totalPrice" value="">
+
+                    <!-- Privacy Agreement Section -->
+                    <div class="bg-white p-4 rounded-4 shadow-sm mb-4 mb-lg-0 border-start border-4 border-primary">
+                        <div class="form-check d-flex align-items-center">
+                            <input class="form-check-input fs-5 mt-0 me-3" type="checkbox" id="agree" name="agree" required>
+                            <label class="form-check-label text-muted" for="agree">
+                                Tôi đã đọc và đồng ý với <a href="#" target="_blank" class="fw-bold text-primary">Điều khoản thanh toán</a> và quy định của LOTUSMILE.
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="order-coupon">
-                    <input type="text" placeholder="Mã giảm giá" style="width: 65%;">
-                    <button style="width: 30%" class="booking-btn btn-coupon">Áp dụng</button>
+
+                <div class="col-lg-4">
+                    <div class="booking-summary bg-white rounded-4 shadow-sm overflow-hidden" style="position: sticky; top: 120px;">
+                        <div class="bg-primary text-white p-4">
+                            <h5 class="fw-bold mb-0 text-white">Tóm tắt chuyến đi</h5>
+                        </div>
+                        <div class="p-4">
+                            <div class="tour-info pb-3 border-bottom mb-3">
+                                <div class="d-flex mb-3">
+                                    <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0]) }}" alt="Tour" class="rounded-3" style="width: 80px; height: 80px; object-fit: cover;">
+                                    <div class="ms-3">
+                                        <span class="badge bg-secondary-subtle text-secondary mb-1">Mã tour: {{ $tour->tourId }}</span>
+                                        <input type="hidden" name="tourId" id="tourId" value="{{ $tour->tourId }}">
+                                        <h6 class="fw-bold mb-0" style="line-height: 1.4; font-size: 15px;">{{ $tour->title }}</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2 text-muted" style="font-size: 14px;">
+                                    <span>Khởi hành:</span>
+                                    <span class="fw-bold text-dark">{{ date('d-m-Y', strtotime($tour->startDate)) }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2 text-muted" style="font-size: 14px;">
+                                    <span>Kết thúc:</span>
+                                    <span class="fw-bold text-dark">{{ date('d-m-Y', strtotime($tour->endDate)) }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between text-muted" style="font-size: 14px;">
+                                    <span>Số chỗ còn nhận:</span>
+                                    <span class="fw-bold text-success quantityAvailable">{{ $tour->quantity }}</span>
+                                </div>
+                            </div>
+
+                            <div class="order-details pb-3 border-bottom mb-3">
+                                <h6 class="fw-bold mb-3">Chi tiết giá</h6>
+                                <div class="summary-item d-flex justify-content-between mb-2">
+                                    <span class="text-muted">Người lớn:</span>
+                                    <div class="fw-600">
+                                        <span class="quantity__adults">1</span> x <span class="total-price">{{ number_format($tour->priceAdult, 0, ',', '.') }} VNĐ</span>
+                                    </div>
+                                </div>
+                                <div class="summary-item d-flex justify-content-between mb-2">
+                                    <span class="text-muted">Trẻ em:</span>
+                                    <div class="fw-600">
+                                        <span class="quantity__children">0</span> x <span class="total-price">0 VNĐ</span>
+                                    </div>
+                                </div>
+                                <div class="summary-item d-flex justify-content-between text-success">
+                                    <span>Giảm giá:</span>
+                                    <div class="fw-600">
+                                        <span class="total-price">0 VNĐ</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order-coupon d-flex mb-4">
+                                <input type="text" class="form-control rounded-start-pill bg-light border-0" placeholder="Mã giảm giá">
+                                <button type="button" class="btn btn-secondary rounded-end-pill px-3 btn-coupon">Áp dụng</button>
+                            </div>
+
+                            <div class="total-amount d-flex justify-content-between align-items-center mb-4">
+                                <span class="fw-bold fs-5">Tổng cộng:</span>
+                                <span class="fw-bold text-primary fs-3 total-price-display">{{ number_format($tour->priceAdult, 0, ',', '.') }} <small class="fs-6 text-muted">VNĐ</small></span>
+                                <input type="hidden" class="totalPrice" name="totalPrice" value="{{ $tour->priceAdult }}">
+                            </div>
+
+                            <div id="paypal-button-container" class="mb-3"></div>
+
+                            <!-- <button type="submit" class="booking-btn btn-submit-booking">Xác Nhận</button> -->
+                            <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm text-uppercase booking-btn btn-submit-bookingg">Xác Nhận Đặt Tour</button>
+
+                            <button id="btn-momo-payment" type="button" class="btn btn-danger w-100 rounded-pill py-3 fw-bold shadow-sm text-uppercase mt-2 d-flex align-items-center justify-content-center" style="display: none !important; background-color: #a50064; border-color: #a50064;" data-urlmomo="{{ route('createMomoPayment') }}">
+                                Thanh toán qua Momo
+                                <img src="{{ asset('clients/assets/images/booking/icon-thanh-toan-momo.png') }}" alt="Momo" class="ms-2" style="height: 20px;">
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
-                <div id="paypal-button-container"></div>
-
-                <button type="submit" class="booking-btn btn-submit-booking">Xác Nhận</button>
-
-                <button id="btn-momo-payment" class="booking-btn" style="display: none;"
-                    data-urlmomo = "{{ route('createMomoPayment') }}">Thanh toán với Momo <img src="{{ asset('clients/assets/images/booking/icon-thanh-toan-momo.png') }}" alt="" style="width: 10%"></button>
-
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </section>
 
 

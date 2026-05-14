@@ -16,30 +16,23 @@
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Booking</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
+                        <div class="x_panel border-0 shadow-sm" style="border-radius: 12px;">
+                            <div class="x_title border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h2 class="font-weight-bold" style="color: var(--primary-color); font-size: 20px;">Danh sách Booking</h2>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content">
+                            <div class="x_content pt-3">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="card-box table-responsive">
-                                            <p class="text-muted font-13 m-b-30">
-                                                Chào mừng bạn đến với trang quản lý tour đã đặt. Tại đây, bạn có thể xác nhận,
-                                                xem chi tiết, và quản lý tất cả các tour đã được đặt hiện có.
+                                            <p class="text-muted font-13 mb-4">
+                                                Quản lý các đơn đặt tour. Bạn có thể xem chi tiết, xác nhận thanh toán hoặc hủy đơn tại đây.
                                             </p>
-                                            <table id="datatable-booking" class="table table-striped table-bordered"
+                                            <table id="datatable-booking" class="table table-hover table-borderless"
                                                 style="width:100%">
-                                                <thead>
+                                                <thead style="background-color: var(--bg-color);">
                                                     <tr>
-                                                        <th>Tên Tours</th>
+                                                        <th style="border-radius: 8px 0 0 8px;">Tên Tours</th>
                                                         <th>Tên khách hàng</th>
                                                         <th>Email</th>
                                                         <th>Số điện thoại</th>
@@ -51,7 +44,7 @@
                                                         <th>Trạng thái Booking</th>
                                                         <th>Thanh toán</th>
                                                         <th>Trạng thái</th>
-                                                        <th>Hành động</th>
+                                                        <th style="border-radius: 0 8px 8px 0;">Hành động</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbody-booking">

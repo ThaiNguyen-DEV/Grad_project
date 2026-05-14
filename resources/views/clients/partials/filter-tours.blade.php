@@ -1,17 +1,15 @@
 @foreach ($tours as $tour)
-    <div class="col-xl-4 col-md-6" style="margin-bottom: 30px">
-        <div class="destination-item tour-grid style-three bgc-lighter block_tours equal-block-fix" data-aos="fade-up"
-            data-aos-duration="1500" data-aos-offset="50">
-            <div class="image">
-                <span class="badge bgc-pink">Featured</span>
-                <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0] . '') }}" alt="Tour List">
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="destination-item bg-white rounded-4 shadow-sm h-100 overflow-hidden" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50" style="transition: all 0.3s;">
+            <div class="image position-relative" style="height: 200px; overflow: hidden;">
+                <span class="badge position-absolute top-0 start-0 m-3 z-3" style="font-size: 13px; background-color: var(--secondary-color);">Đặc Biệt</span>
+                <a href="#" class="heart position-absolute top-0 end-0 m-3 z-3 text-white fs-4"><i class="far fa-heart"></i></a>
+                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0] . '') }}" alt="Tour List" class="w-100 h-100 object-fit-cover" style="transition: transform 0.5s;">
             </div>
-            <div class="content equal-content-fix">
-                <div class="destination-header">
-                    <span class="location"><i class="fal fa-map-marker-alt"></i>
-                        {{ $tour->destination }}</span>
-                    <div class="ratting">
+            <div class="content p-4">
+                <div class="destination-header d-flex justify-content-between align-items-center mb-2">
+                    <span class="location text-muted" style="font-size: 13px;"><i class="fal fa-map-marker-alt text-primary me-2"></i>{{ $tour->destination }}</span>
+                    <div class="ratting text-warning" style="font-size: 12px;">
                         @for ($i = 0; $i < 5; $i++)
                             @if ($tour->rating && $i < $tour->rating)
                                 <i class="fas fa-star"></i>
@@ -19,21 +17,16 @@
                                 <i class="far fa-star"></i>
                             @endif
                         @endfor
-
                     </div>
                 </div>
-                <h6><a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}">{{ $tour->title }}</a> </h6>
-                <ul class="blog-meta">
-                    <li><i class="far fa-clock"></i>{{ $tour->time }}</li>
-                    <li><i class="far fa-user"></i>{{ $tour->quantity }}</li>
+                <h6 class="mb-3" style="min-height: 40px; line-height: 1.4;"><a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="text-dark text-decoration-none">{{ $tour->title }}</a></h6>
+                <ul class="blog-meta d-flex list-unstyled mb-3 text-muted" style="font-size: 13px; gap: 15px;">
+                    <li><i class="fal fa-clock me-1 text-primary"></i> {{ $tour->time }}</li>
+                    <li><i class="fal fa-user me-1 text-primary"></i> {{ $tour->quantity }} chỗ</li>
                 </ul>
-                <div class="destination-footer">
-                    <span class="price"><span>{{ number_format($tour->priceAdult, 0, ',', '.') }}</span>
-                        VND / người</span>
-                    <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}"
-                        class="theme-btn style-two style-three">
-                        <i class="fal fa-arrow-right"></i>
-                    </a>
+                <div class="destination-footer d-flex justify-content-between align-items-center pt-3 border-top">
+                    <span class="price fw-bold" style="color: var(--secondary-color); font-size: 16px;">{{ number_format($tour->priceAdult, 0, ',', '.') }} <small class="text-muted fw-normal fs-6">VND</small></span>
+                    <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-600" style="border-color: var(--primary-color); color: var(--primary-color);">Chi Tiết <i class="fal fa-arrow-right ms-1"></i></a>
                 </div>
             </div>
         </div>

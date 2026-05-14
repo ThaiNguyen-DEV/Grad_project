@@ -16,41 +16,36 @@
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Tours</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
+                        <div class="x_panel border-0 shadow-sm" style="border-radius: 12px;">
+                            <div class="x_title border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h2 class="font-weight-bold" style="color: var(--primary-color); font-size: 20px;">Danh sách Tours</h2>
+                                <a href="{{ route('admin.page-add-tours') }}" class="btn btn-primary rounded-pill shadow-sm px-4">
+                                    <i class="fa fa-plus me-2"></i> Thêm Tour mới
+                                </a>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content">
+                            <div class="x_content pt-3">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="card-box table-responsive">
-                                            <p class="text-muted font-13 m-b-30">
-                                                Chào mừng bạn đến với trang quản lý tour. Tại đây, bạn có thể thêm mới,
-                                                chỉnh sửa, và quản lý tất cả các tour hiện có.
+                                            <p class="text-muted font-13 mb-4">
+                                                Quản lý toàn bộ tour của hệ thống. Bạn có thể sử dụng ô tìm kiếm để lọc tour theo tên hoặc điểm đến.
                                             </p>
-                                            <table id="datatable-listTours" class="table table-striped table-bordered"
+                                            <table id="datatable-listTours" class="table table-hover table-borderless"
                                                 style="width:100%">
-                                                <thead>
+                                                <thead style="background-color: var(--bg-color);">
                                                     <tr>
-                                                        <th>Tên</th>
+                                                        <th style="border-radius: 8px 0 0 8px;">Tên</th>
                                                         <th>Thời gian</th>
                                                         <th>Mô tả</th>
                                                         <th>Số lượng</th>
-                                                        <th>Giá người lớn</th>
-                                                        <th>Giá trẻ em</th>
+                                                        <th>Giá NL</th>
+                                                        <th>Giá TE</th>
                                                         <th>Điểm đến</th>
                                                         <th>Khả dụng</th>
-                                                        <th>Ngày bắt đầu</th>
-                                                        <th>Ngày kết thúc</th>
-                                                        <th>Sửa</th>
-                                                        <th>Xóa</th>
+                                                        <th>Bắt đầu</th>
+                                                        <th>Kết thúc</th>
+                                                        <th>Thao tác</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbody-listTours">
