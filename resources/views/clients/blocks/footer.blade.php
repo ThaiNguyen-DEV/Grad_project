@@ -148,8 +148,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 {{-- paypal-payment  --}}
+@if(env('PAYPAL_SANDBOX_CLIENT_ID'))
 <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_SANDBOX_CLIENT_ID') }}"></script>
-
+@endif
 <!-- Custom script by Dev dien-->
 <script src="{{asset('clients/assets/js/custom-js.js')}}"></script>
 <script src="{{asset('clients/assets/js/jquery.datetimepicker.full.min.js')}}"></script>

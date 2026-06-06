@@ -158,7 +158,7 @@
                     data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide1.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>Vo Thanh Tam</h6>
+                        <h6>Nguyen Dinh Duy Thai</h6>
                         <span class="designation">Founder</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>

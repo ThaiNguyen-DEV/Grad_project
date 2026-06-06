@@ -67,7 +67,7 @@ Route::post('/change-avatar-profile', [UserProfileController::class, 'changeAvat
 //Hanlde checkout
 Route::post('/booking/{id?}', [BookingController::class, 'index'])->name('booking')->middleware('checkLoginClient');
 Route::post('/create-booking', [BookingController::class, 'createBooking'])->name('create-booking');
-Route::get('/booking', [BookingController::class, 'handlePaymentMomoCallback'])->name('handlePaymentMomoCallback');
+Route::get('/vnpay/callback', [BookingController::class, 'handleVNPayCallback'])->name('vnpay.callback');
 
 //Payment with paypal
 Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
@@ -75,8 +75,8 @@ Route::get('process-transaction', [PayPalController::class, 'processTransaction'
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
-//Payment with Momo
-Route::post('/create-momo-payment', [BookingController::class, 'createMomoPayment'])->name('createMomoPayment');
+//Payment with VNPay
+Route::post('/create-vnpay-payment', [BookingController::class, 'createVNPayPayment'])->name('createVNPayPayment');
 
 
 //Tour booked
@@ -107,7 +107,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [LoginAdminController::class, 'index'])->name('admin.login');
     Route::post('/login-account', [LoginAdminController::class, 'loginAdmin'])->name('admin.login-account');
     Route::get('/logout', [LoginAdminController::class, 'logout'])->name('admin.logout');
-
 });
 
 Route::prefix('admin')->middleware('admin')->group(function () {
@@ -150,5 +149,4 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     //Contact management
     Route::get('/contact', [ContactManagementController::class, 'index'])->name('admin.contact');
     Route::post('/reply-contact', [ContactManagementController::class, 'replyContact'])->name('admin.reply-contact');
-
 });

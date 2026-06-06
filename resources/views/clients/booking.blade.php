@@ -139,16 +139,16 @@
                             <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
                                 <div class="d-flex align-items-center">
                                     <div class="form-check">
-                                        <input class="form-check-input fs-5" type="radio" name="payment" value="momo-payment" required>
+                                        <input class="form-check-input fs-5" type="radio" name="payment" value="vnpay-payment" required>
                                     </div>
-                                    <img src="{{ asset('clients/assets/images/booking/thanh-toan-momo.jpg') }}" alt="MoMo" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <img src="{{ asset('clients/assets/images/booking/vnpay-logo.jpg') }}" alt="MoMo" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
                                     <div>
-                                        <h6 class="fw-bold mb-0">Thanh toán bằng Momo</h6>
-                                        <span class="text-muted" style="font-size: 13px;">Thanh toán tiện lợi qua ví điện tử MoMo</span>
+                                        <h6 class="fw-bold mb-0">Thanh toán bằng VNPay</h6>
+                                        <span class="text-muted" style="font-size: 13px;">Thanh toán qua cổng VNPay</span>
                                     </div>
                                 </div>
-                                @if (!is_null($transIdMomo))
-                                <input type="hidden" name="transactionIdMomo" value="{{ $transIdMomo }}">
+                                @if (!empty($transIdVNPay))
+                                <input type="hidden" name="transactionIdVNPay" value="{{ $transIdVNPay }}">
                                 @endif
                             </label>
 
@@ -234,10 +234,12 @@
                             <!-- <button type="submit" class="booking-btn btn-submit-booking">Xác Nhận</button> -->
                             <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm text-uppercase booking-btn btn-submit-bookingg">Xác Nhận Đặt Tour</button>
 
-                            <button id="btn-momo-payment" type="button" class="btn btn-danger w-100 rounded-pill py-3 fw-bold shadow-sm text-uppercase mt-2 d-flex align-items-center justify-content-center" style="display: none !important; background-color: #a50064; border-color: #a50064;" data-urlmomo="{{ route('createMomoPayment') }}">
-                                Thanh toán qua Momo
-                                <img src="{{ asset('clients/assets/images/booking/icon-thanh-toan-momo.png') }}" alt="Momo" class="ms-2" style="height: 20px;">
-                            </button>
+                            <!-- <button id="btn-vnpay-payment" type="button"
+                                class="btn btn-success w-100 rounded-pill py-3 fw-bold shadow-sm text-uppercase mt-2"
+                                style="display: none;"
+                                data-urlvnpay="{{ route('createVNPayPayment') }}">
+                                Thanh toán qua VNPay
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -248,3 +250,83 @@
 
 
 @include('clients.blocks.footer')
+<script>
+    $(document).ready(function() {
+
+        // Sync payment_hidden mỗi lần thay đổi
+        $('input[name="payment"]').on('change', function() {
+            $('#payment_hidden').val($(this).val());
+        });
+
+        // Khi submit form
+        $('.booking-form').on('submit', function(e) {
+
+            // Đọc trực tiếp từ radio được chọn, không dùng payment_hidden
+            var paymentMethod = $('input[name="payment"]:checked').val();
+
+            // Sync lại payment_hidden
+            $('#payment_hidden').val(paymentMethod);
+
+            console.log('Payment method:', paymentMethod);
+
+            if (!paymentMethod) {
+                e.preventDefault();
+                alert('Vui lòng chọn phương thức thanh toán!');
+                return;
+            }
+
+            if (paymentMethod === 'vnpay-payment') {
+                e.preventDefault();
+
+                var formData = $('.booking-form').serialize();
+
+                console.log('formData:', formData);
+
+                $('.btn-submit-bookingg').prop('disabled', true).text('Đang kết nối VNPay...');
+
+                $.ajax({
+                    url: '{{ route("createVNPayPayment") }}',
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log('VNPay response:', response);
+                        if (response.payUrl) {
+                            window.location.href = response.payUrl;
+                        } else {
+                            alert('Không lấy được link thanh toán VNPay!');
+                            $('.btn-submit-bookingg').prop('disabled', false).text('Xác Nhận Đặt Tour');
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log('VNPay error:', xhr.responseText);
+                        alert('Lỗi kết nối VNPay!');
+                        $('.btn-submit-bookingg').prop('disabled', false).text('Xác Nhận Đặt Tour');
+                    }
+                });
+            }
+            // office-payment và paypal-payment submit form bình thường
+        });
+
+        // Callback VNPay - khôi phục lại dữ liệu form
+        @if(isset($formData))
+        const formData = @json($formData);
+        $('#username').val(formData.fullName || '');
+        $('#email').val(formData.email || '');
+        $('#tel').val(formData.tel || '');
+        $('#address').val(formData.address || '');
+        $('#numAdults').val(formData.numAdults || '1');
+        $('#numChildren').val(formData.numChildren || '0');
+        @endif
+
+        // Callback VNPay thành công → tự động submit form
+        @if(!empty($transIdVNPay))
+        $('input[name="payment"][value="vnpay-payment"]').prop('checked', true);
+        $('#payment_hidden').val('vnpay-payment');
+
+        // Remove event listener to allow native form submission
+        $('.booking-form').off('submit');
+        $('.booking-form')[0].submit();
+        @endif
+
+    });
+</script>
