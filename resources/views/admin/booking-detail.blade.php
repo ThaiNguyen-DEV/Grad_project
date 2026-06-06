@@ -121,7 +121,10 @@
                                                         class="invoice_payment-method" alt="">
                                                 @elseif ($invoice_booking->paymentMethod == 'paypal-payment')
                                                     <img src="{{ asset('admin/assets/images/icon/icon_paypal.png') }}"
-                                                        class="invoice_payment-method" alt="">
+                                                        class="icon_payment" alt="PayPal" style="width: 24px;">
+                                                @elseif ($invoice_booking->paymentMethod == 'zalopay-payment')
+                                                    <img src="https://play-lh.googleusercontent.com/yTofHdJGzXUaX11V8Y-hI8PzNfXhJvW61TntEa78iQ-l9-5zO98GjZ1F4p5H8N9IHg=w240-h240-rw"
+                                                        class="icon_payment" alt="ZaloPay" style="width: 24px;">
                                                 @else
                                                     <img src="{{ asset('admin/assets/images/icon/icon_office.png') }}"
                                                         alt="">

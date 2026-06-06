@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-xl-8">
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel">
@@ -70,7 +70,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="fw-bold mb-2 text-dark" for="inputEmailAddress">Email liên hệ</label>
-                                                <input class="form-control bg-light border-0 p-3 rounded-3" id="inputEmailAddress" type="email" 
+                                                <input class="form-control bg-light border-0 p-3 rounded-3" id="inputEmailAddress" type="email"
                                                     placeholder="Nhập email" value="{{ $user->email }}" required readonly>
                                                 <small class="text-muted mt-1 d-block"><i class="fal fa-info-circle me-1"></i>Email dùng để đăng nhập nên không thể thay đổi.</small>
                                             </div>
@@ -78,7 +78,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="fw-bold mb-2 text-dark" for="inputLocation">Địa chỉ hiện tại</label>
-                                                <input class="form-control bg-light border-0 p-3 rounded-3" id="inputLocation" type="text" 
+                                                <input class="form-control bg-light border-0 p-3 rounded-3" id="inputLocation" type="text"
                                                     placeholder="Nhập địa chỉ đầy đủ" value="{{ $user->address }}" required>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="tab-pane fade" id="v-pills-security" role="tabpanel">
                         <div class="card border-0 shadow-sm rounded-4 mb-4">
                             <div class="card-header bg-white border-bottom pt-4 pb-3 px-4 px-md-5">

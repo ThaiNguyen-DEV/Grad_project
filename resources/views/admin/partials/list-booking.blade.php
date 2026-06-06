@@ -25,6 +25,8 @@
                 <img src="{{ asset('admin/assets/images/icon/icon_momo.png') }}" class="icon_payment" alt="Momo" style="width: 24px;">
             @elseif ($booking->paymentMethod == 'paypal-payment')
                 <img src="{{ asset('admin/assets/images/icon/icon_paypal.png') }}" class="icon_payment" alt="PayPal" style="width: 24px;">
+            @elseif ($booking->paymentMethod == 'zalopay-payment')
+                <img src="https://play-lh.googleusercontent.com/yTofHdJGzXUaX11V8Y-hI8PzNfXhJvW61TntEa78iQ-l9-5zO98GjZ1F4p5H8N9IHg=w240-h240-rw" class="icon_payment" alt="ZaloPay" style="width: 24px;">
             @else
                 <i class="fa fa-money text-success" style="font-size: 20px;" title="Tiền mặt"></i>
             @endif

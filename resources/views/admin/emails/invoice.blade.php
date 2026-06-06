@@ -90,6 +90,8 @@
                     <h1 style="color: red; font-weight: bold;">Thanh toán tại Momo</h1>
                     @elseif ($invoice_booking->paymentMethod == 'paypal-payment')
                     <h1 style="color: red; font-weight: bold;">Thanh toán tại Paypal</h1>
+                    @elseif ($invoice_booking->paymentMethod == 'zalopay-payment')
+                    <h1 style="color: blue; font-weight: bold;">Thanh toán tại ZaloPay</h1>
                     @else
                     <h1 style="color: red; font-weight: bold;">Thanh toán tại văn phòng</h1>
                     @endif

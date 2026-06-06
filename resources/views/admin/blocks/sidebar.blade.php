@@ -2,7 +2,7 @@
     <div class="left_col scroll-view">
         <div class="navbar nav_title d-flex align-items-center justify-content-center" style="border: 0; padding: 15px 0;">
             <a href="{{ route('admin.dashboard') }}" class="site_title text-center text-white" style="padding-left: 0;">
-                <i class="fa fa-paper-plane"></i> <span class="font-weight-bold" style="font-family: 'Outfit', sans-serif;">LOTUSMILE</span>
+                <i class="fa fa-paper-plane"></i> <span class="font-weight-bold" style="font-family: 'Inter', sans-serif;">LOTUSMILE</span>
             </a>
         </div>
 
@@ -67,9 +67,9 @@
 <!-- top navigation -->
 <div class="top_nav">
     <div class="nav_menu">
-        <div class="nav toggle">
+        <!-- <div class="nav toggle">
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-        </div>
+        </div> -->
         <nav class="nav navbar-nav">
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
@@ -77,7 +77,7 @@
                         data-toggle="dropdown" aria-expanded="false" style="color: #333; font-weight: 500;">
                         <img src="{{ asset('admin/assets/images/user-profile/avt_admin.jpg') }}" alt="" style="border: 2px solid #e9ecef;">
                         @if (session()->has('admin'))
-                            {{ session('admin') }}
+                        {{ session('admin') }}
                         @endif
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
@@ -95,15 +95,15 @@
                     </a>
                     <ul class="dropdown-menu list-unstyled msg_list shadow" role="menu" aria-labelledby="navbarDropdown1" style="border-radius: 8px; border: none;">
                         @foreach ($unreadContacts->take(3) as $item)
-                            <li class="nav-item" style="border-bottom: 1px solid #f4f6f9;">
-                                <a class="dropdown-item" href="{{ route('admin.contact') }}">
-                                    <span>
-                                        <b style="color: #333;">{{ $item->fullName }}</b>
-                                        <span class="time" style="color: #999; font-size: 11px;">{{ $item->phoneNumber }}</span>
-                                    </span>
-                                    <span class="message text-contact-truncate" style="color: #666; font-size: 13px;" >{{ $item->message }} </span>
-                                </a>
-                            </li>
+                        <li class="nav-item" style="border-bottom: 1px solid #f4f6f9;">
+                            <a class="dropdown-item" href="{{ route('admin.contact') }}">
+                                <span>
+                                    <b style="color: #333;">{{ $item->fullName }}</b>
+                                    <span class="time" style="color: #999; font-size: 11px;">{{ $item->phoneNumber }}</span>
+                                </span>
+                                <span class="message text-contact-truncate" style="color: #666; font-size: 13px;">{{ $item->message }} </span>
+                            </a>
+                        </li>
                         @endforeach
                         <li>
                             <div class="text-center">

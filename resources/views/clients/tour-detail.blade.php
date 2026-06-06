@@ -26,7 +26,7 @@
                     <a href="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[0]) }}" class="d-block w-100 h-100">
                         <img src="{{ asset('admin/assets/images/gallery-tours/' . $tourDetail->images[0]) }}"
                             alt="Destination" class="w-100 h-100 object-fit-cover" style="transition: transform 0.5s;">
-                        <div class="overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)); position: absolute; top:0; left:0; right:0; bottom:0;"></div>
+                        <!-- <div class="overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0)); position: absolute; top:0; left:0; right:0; bottom:0;"></div> -->
                     </a>
                 </div>
             </div>
@@ -83,12 +83,12 @@
                         <div class="ratting text-warning">
                             @for ($i = 0; $i < 5; $i++)
                                 @if ($avgStar && $i < $avgStar)
-                                    <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                                 @else
-                                    <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
                                 @endif
-                            @endfor
-                            <span class="text-muted ms-1 fs-6">({{ $avgStar ? number_format($avgStar, 1) : 0 }} sao)</span>
+                                @endfor
+                                <span class="text-muted ms-1 fs-6">({{ $avgStar ? number_format($avgStar, 1) : 0 }} sao)</span>
                         </div>
                     </div>
                     <h2 class="fw-bold mb-0 text-dark">{{ $tourDetail->title }}</h2>
@@ -116,7 +116,7 @@
                     <div class="text-muted" style="line-height: 1.8;">
                         <p>{!! $tourDetail->description !!}</p>
                     </div>
-                    
+
                     <div class="row pt-4 pb-2">
                         <div class="col-md-6 mb-4 mb-md-0">
                             <div class="tour-include bg-light p-4 rounded-4 h-100">
@@ -148,20 +148,20 @@
                     <div class="accordion accordion-flush" id="faq-accordion-two">
                         @php $day = 1; @endphp
                         @foreach ($tourDetail->timeline as $index => $timeline)
-                            <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
-                                <h5 class="accordion-header">
-                                    <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }} fw-bold bg-light" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo{{ $timeline->timeLineId }}">
-                                        <span class="badge bg-primary me-3">Ngày {{ $day++ }}</span> {{ $timeline->title }}
-                                    </button>
-                                </h5>
-                                <div id="collapseTwo{{ $timeline->timeLineId }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
-                                    data-bs-parent="#faq-accordion-two">
-                                    <div class="accordion-body text-muted" style="line-height: 1.8;">
-                                        <p>{!! $timeline->description !!}</p>
-                                    </div>
+                        <div class="accordion-item mb-3 border rounded-3 overflow-hidden">
+                            <h5 class="accordion-header">
+                                <button class="accordion-button {{ $index == 0 ? '' : 'collapsed' }} fw-bold bg-light" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo{{ $timeline->timeLineId }}">
+                                    <span class="badge bg-primary me-3">Ngày {{ $day++ }}</span> {{ $timeline->title }}
+                                </button>
+                            </h5>
+                            <div id="collapseTwo{{ $timeline->timeLineId }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                                data-bs-parent="#faq-accordion-two">
+                                <div class="accordion-body text-muted" style="line-height: 1.8;">
+                                    <p>{!! $timeline->description !!}</p>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -188,7 +188,7 @@
                                     <i class="far fa-star" data-value="5"></i>
                                 </div>
                             </div>
-                            
+
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-group mb-3">
@@ -217,7 +217,7 @@
                             <span class="d-block text-muted fs-6 mb-1">Giá chỉ từ</span>
                             <h3 class="text-primary fw-bold mb-0">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} <span class="fs-6 text-muted fw-normal">VND</span></h3>
                         </div>
-                        
+
                         <form action="{{ route('booking', ['id' => $tourDetail->tourId]) }}" method="POST">
                             @csrf
                             <div class="bg-light p-3 rounded-3 mb-4">
@@ -255,7 +255,7 @@
                             <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm mb-3 text-uppercase fs-6">
                                 Đặt Chỗ Ngay <i class="fal fa-arrow-right ms-2"></i>
                             </button>
-                            
+
                             <div class="text-center">
                                 <a href="{{ route('contact') }}" class="text-muted text-decoration-none" style="font-size: 14px;"><i class="fal fa-info-circle me-1"></i> Cần tư vấn thêm? Liên hệ</a>
                             </div>
@@ -263,23 +263,23 @@
                     </div>
 
                     @if (!empty($tourRecommendations))
-                        <div class="widget widget-tour bg-white p-4 rounded-4 shadow-sm">
-                            <h5 class="fw-bold mb-4 pb-2 border-bottom">Có Thể Bạn Quan Tâm</h5>
-                            @foreach ($tourRecommendations as $tour)
-                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                                    <div class="image me-3" style="width: 80px; height: 80px; border-radius: 10px; overflow: hidden; flex-shrink: 0;">
-                                        <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0]) }}"
-                                            alt="Tour" class="w-100 h-100 object-fit-cover">
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="mb-1" style="line-height: 1.4; font-size: 14px;">
-                                            <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="text-dark text-decoration-none">{{ $tour->title }}</a>
-                                        </h6>
-                                        <span class="text-primary fw-bold" style="font-size: 14px;">{{ number_format($tour->priceAdult, 0, ',', '.') }} đ</span>
-                                    </div>
-                                </div>
-                            @endforeach
+                    <div class="widget widget-tour bg-white p-4 rounded-4 shadow-sm">
+                        <h5 class="fw-bold mb-4 pb-2 border-bottom">Có Thể Bạn Quan Tâm</h5>
+                        @foreach ($tourRecommendations as $tour)
+                        <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                            <div class="image me-3" style="width: 80px; height: 80px; border-radius: 10px; overflow: hidden; flex-shrink: 0;">
+                                <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0]) }}"
+                                    alt="Tour" class="w-100 h-100 object-fit-cover">
+                            </div>
+                            <div class="content">
+                                <h6 class="mb-1" style="line-height: 1.4; font-size: 14px;">
+                                    <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="text-dark text-decoration-none">{{ $tour->title }}</a>
+                                </h6>
+                                <span class="text-primary fw-bold" style="font-size: 14px;">{{ number_format($tour->priceAdult, 0, ',', '.') }} đ</span>
+                            </div>
                         </div>
+                        @endforeach
+                    </div>
                     @endif
                 </div>
             </div>

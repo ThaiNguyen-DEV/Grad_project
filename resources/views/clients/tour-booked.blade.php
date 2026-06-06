@@ -56,20 +56,25 @@
 
             <label class="payment-option">
                 <input type="radio" value="office-payment" @if ($tour_booked->paymentMethod == 'office-payment') checked @endif disabled>
-                <img src="{{ asset('clients/assets/images/contact/icon.png') }}" alt="Office Payment">
-                Thanh toán tại văn phòng
+                <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Office Payment">
+                Thanh toán trực tiếp
             </label>
 
-            <label class="payment-option">
+            <!-- <label class="payment-option">
                 <input type="radio" value="paypal-payment" @if ($tour_booked->paymentMethod == 'paypal-payment') checked @endif disabled>
                 <img src="{{ asset('clients/assets/images/booking/cong-thanh-toan-paypal.jpg') }}" alt="PayPal">
                 Thanh toán bằng PayPal
+            </label> -->
+            <label class="payment-option">
+                <input type="radio" value="zalopay-payment" @if ($tour_booked->paymentMethod == 'zalopay-payment') checked @endif disabled>
+                <img src="{{ asset('clients/assets/images/booking/zalopay-logo.jpg') }}" alt="ZaloPay">
+                Thanh toán bằng ZaloPay
             </label>
 
             <label class="payment-option">
                 <input type="radio" value="momo-payment" @if ($tour_booked->paymentMethod == 'momo-payment') checked @endif disabled>
-                <img src="{{ asset('clients/assets/images/booking/thanh-toan-momo.jpg') }}" alt="MoMo">
-                Thanh toán bằng Momo
+                <img src="{{ asset('clients/assets/images/booking/vnpay-logo.jpg') }}" alt="VNPAY">
+                Thanh toán bằng VNPAY
             </label>
 
         </div>
@@ -125,12 +130,12 @@
                 <input type="hidden" name="bookingId" value="{{ $bookingId }}">
 
                 @if ($tour_booked->bookingStatus == 'f')
-                    <a href="{{ route('tour-detail', ['id' => $tour_booked->tourId]) }}" class="booking-btn"style="display: inline-block; text-align: center;">
-                       Đánh giá
-                    </a>
+                <a href="{{ route('tour-detail', ['id' => $tour_booked->tourId]) }}" class="booking-btn" style="display: inline-block; text-align: center;">
+                    Đánh giá
+                </a>
                 @else
-                    <button type="submit" class="booking-btn btn-cancel-booking {{ $hide }}">Hủy
-                        Tour</button>
+                <button type="submit" class="booking-btn btn-cancel-booking {{ $hide }}">Hủy
+                    Tour</button>
                 @endif
 
             </div>

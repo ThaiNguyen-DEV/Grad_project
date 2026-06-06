@@ -2,6 +2,30 @@
 @include('clients.blocks.banner')
 
 <!-- Tour Grid Area start -->
+<style>
+    /* Sửa lỗi nút radio/checkbox bị biến dạng thành hình bầu dục và rớt dòng */
+    .shop-sidebar .form-check {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px;
+        padding-left: 0 !important;
+    }
+
+    .shop-sidebar .form-check-input {
+        width: 1.25em !important;
+        height: 1.25em !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex-shrink: 0;
+        border-radius: 50% !important;
+    }
+
+    .shop-sidebar .form-check-label {
+        margin-bottom: 0 !important;
+        flex-grow: 1;
+    }
+</style>
 <section class="tour-grid-page py-80 rel z-1" style="background-color: #f5f7fa;">
     <div class="container">
         <div class="row">
@@ -14,8 +38,7 @@
                         </button>
                     </div>
 
-                    <div class="widget widget-filter mb-4" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500"
-                        data-aos-offset="50">
+                    <div class="widget widget-filter mb-4">
                         <h6 class="widget-title fw-bold mb-3">Lọc theo giá</h6>
                         <div class="price-filter-wrap">
                             <div class="price-slider-range mb-3"></div>
@@ -26,8 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="widget widget-activity mb-4" data-aos="fade-up" data-aos-duration="1500"
-                        data-aos-offset="50">
+                    <div class="widget widget-activity mb-4">
                         <h6 class="widget-title fw-bold mb-3">Điểm đến</h6>
                         <ul class="list-unstyled mb-0" style="font-size: 14px;">
                             <li class="mb-2">
@@ -57,7 +79,7 @@
                         </ul>
                     </div>
 
-                    <div class="widget widget-reviews mb-4" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
+                    <div class="widget widget-reviews mb-4">
                         <h6 class="widget-title fw-bold mb-3">Đánh giá</h6>
                         <ul class="list-unstyled mb-0" style="font-size: 14px;">
                             <li class="mb-2">
@@ -90,8 +112,7 @@
                         </ul>
                     </div>
 
-                    <div class="widget widget-duration" data-aos="fade-up" data-aos-duration="1500"
-                        data-aos-offset="50">
+                    <div class="widget widget-duration">
                         <h6 class="widget-title fw-bold mb-3">Thời gian</h6>
                         <ul class="list-unstyled mb-0" style="font-size: 14px;">
                             <li class="mb-2">
@@ -117,51 +138,68 @@
 
                 </div>
 
-                <div class="widget widget-cta mt-4 rounded-4 overflow-hidden position-relative" data-aos="fade-up" data-aos-duration="1500"
-                    data-aos-offset="50">
+                <div class="widget widget-cta mt-4 rounded-4 overflow-hidden position-relative">
                     <div class="image w-100 h-100 position-absolute top-0 start-0 z-0">
-                        <img src="{{ asset('clients/assets/images/widgets/cta-widget.png') }}" alt="CTA" class="w-100 h-100 object-fit-cover">
-                        <div class="overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0.1)); position: absolute; top:0; left:0; right:0; bottom:0;"></div>
+                        <img src="{{ asset('clients/assets/images/contact/ct2.jpg') }}" alt="CTA" class="w-100 h-100 object-fit-cover">
+                        <!-- <div class="overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.05), rgba(0,0,0,0)); position: absolute; top:0; left:0; right:0; bottom:0;"></div> -->
                     </div>
                     <div class="content text-white position-relative z-1 p-4 text-center d-flex flex-column justify-content-center" style="height: 350px;">
                         <span class="h6 text-uppercase fw-600 mb-2" style="letter-spacing: 2px;">Khám Phá Việt Nam</span>
                         <h3 class="mb-4 text-white fw-bold">Trải nghiệm du lịch tốt nhất</h3>
-                        <a href="{{ route('tours') }}" class="btn rounded-pill px-4 py-2 fw-600 mx-auto" style="background-color: var(--secondary-color); color: white;">
+                        <a href="{{ route('tours') }}" class="btn rounded-pill px-4 py-2 fw-600 mx-auto" style="background-color: var(--primary-color); color: white;">
                             Khám phá ngay <i class="fal fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="shop-shorter bg-white p-3 rounded-4 shadow-sm mb-4 d-flex flex-wrap align-items-center justify-content-between">
-                    <div class="sort-text fw-600 text-dark">
-                        Tất cả Tours
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <div class="sort-text me-3 text-muted" style="font-size: 14px;">
-                            Sắp xếp theo:
-                        </div>
-                        <select id="sorting_tours" class="form-select form-select-sm rounded-pill shadow-none fw-600" style="width: auto; min-width: 150px; cursor: pointer;">
-                            <option value="default" selected="">Mặc định</option>
+
+                {{-- Sort Bar --}}
+                <div class="d-flex align-items-center justify-content-between
+            bg-white rounded-3 shadow-sm px-3 py-2 mb-4">
+                    <span class="fw-600 text-dark" style="font-size: 13px;">
+                        <i class="fal fa-map me-2 text-primary"></i>Tất cả Tours
+                    </span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-muted text-nowrap" style="font-size: 12px;">Sắp xếp:</span>
+                        <select id="sorting_tours"
+                            class="rounded-pill shadow-none fw-600"
+                            style="min-width: 100px; cursor: pointer;
+                       border: 1px solid #dee2e6; font-size: 12px;
+                       padding: 2px 10px;
+                       appearance: none; -webkit-appearance: none;
+                       background: white; outline: none;">
+                            <option value="default" selected>Mặc định</option>
                             <option value="new">Mới nhất</option>
                             <option value="old">Cũ nhất</option>
-                            <option value="hight-to-low">Giá: Cao đến thấp</option>
-                            <option value="low-to-high">Giá: Thấp đến cao</option>
+                            <option value="hight-to-low">Giá: Cao → Thấp</option>
+                            <option value="low-to-high">Giá: Thấp → Cao</option>
                         </select>
                     </div>
                 </div>
 
+                {{-- Tour Grid --}}
                 <div class="tour-grid-wrap position-relative">
-                    <div class="loader" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.7); z-index: 10; justify-content: center; align-items: center;">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
+
+                    {{-- Loading Overlay --}}
+                    <div class="loader position-absolute top-0 start-0 w-100 h-100 d-none"
+                        style="background: rgba(255,255,255,0.75);
+                    backdrop-filter: blur(2px);
+                    z-index: 10;
+                    border-radius: 1rem;">
+                        <div class="d-flex flex-column justify-content-center align-items-center h-100 gap-2">
+                            <div class="spinner-border text-primary" role="status" style="width: 2.5rem; height: 2.5rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <span class="text-muted" style="font-size: 13px;">Đang tải...</span>
                         </div>
                     </div>
+
                     <div class="row" id="tours-container">
                         @include('clients.partials.filter-tours')
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>

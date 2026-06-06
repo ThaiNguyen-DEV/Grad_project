@@ -69,11 +69,9 @@ Route::post('/booking/{id?}', [BookingController::class, 'index'])->name('bookin
 Route::post('/create-booking', [BookingController::class, 'createBooking'])->name('create-booking');
 Route::get('/vnpay/callback', [BookingController::class, 'handleVNPayCallback'])->name('vnpay.callback');
 
-//Payment with paypal
-Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
-Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
-Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
-Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+//Payment with ZaloPay
+Route::post('/create-zalopay-payment', [BookingController::class, 'createZaloPayPayment'])->name('createZaloPayPayment');
+Route::get('/zalopay/callback', [BookingController::class, 'handleZaloPayCallback'])->name('zalopay.callback');
 
 //Payment with VNPay
 Route::post('/create-vnpay-payment', [BookingController::class, 'createVNPayPayment'])->name('createVNPayPayment');

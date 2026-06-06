@@ -13,7 +13,7 @@
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ asset('clients/assets/images/logos/logo.png') }}" type="image/x-icon">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet">
 
     <!-- Flaticon -->
@@ -44,7 +44,6 @@
         href="{{ asset('clients/assets/css/css-login/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/css-login/style.css') }}">
-    {{-- custom css by Dien --}}
     <link rel="stylesheet" href="{{ asset('clients/assets/css/custom-css.css') }}" />
 
     {{-- User Profile  --}}
@@ -73,11 +72,16 @@
                             <span class="me-4"><i class="fas fa-phone-alt me-1" style="color: var(--primary-color);"></i> Hotline: <strong class="text-dark">1900 123 456</strong></span>
                             <span><i class="fas fa-envelope me-1" style="color: var(--primary-color);"></i> contact@lotusmile.com</span>
                         </div>
-                        <div class="col-md-6 col-12 text-center text-md-end">
-                            <div class="social-style-one d-inline-block">
+                        <div class="col-md-6 col-12 text-center text-md-end d-flex justify-content-center justify-content-md-end align-items-center">
+                            <div class="social-style-one d-inline-block me-3">
                                 <a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a>
                                 <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                            </div>
+                            <div class="language-switcher user-dropdown-wrap dropdown d-inline-block border-start ps-3">
+                                <a href="#" class="text-muted text-decoration-none dropdown-toggle" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-globe me-1"></i> {{ strtoupper(app()->getLocale()) }}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -111,8 +115,8 @@
                                             <a href="{{ route('tours') }}" class="text-dark px-3 py-1 d-block fw-600 text-decoration-none">TOURS DU LỊCH</a>
                                             <ul class="dropdown-menu shadow-sm border-0" style="border-radius: 8px;">
                                                 <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Khám phá tất cả Tours</a></li>
-                                                <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Trong Nước</a></li>
-                                                <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Quốc Tế</a></li>
+                                                <!-- <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Trong Nước</a></li>
+                                                <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Quốc Tế</a></li> -->
                                                 <li><a href="{{ route('team') }}" class="dropdown-item py-2">Đội ngũ Hướng Dẫn Viên</a></li>
                                             </ul>
                                         </li>
@@ -130,7 +134,7 @@
                                 <form action="{{ route('search-voice-text') }}" method="GET" class="d-flex align-items-center border rounded-pill overflow-hidden" style="background: #f5f7fa; padding: 0px 4px; width: 250px;">
                                     <i class="fas fa-search text-muted ms-3" style="font-size: 13px;"></i>
                                     <input type="text" name="keyword" placeholder="Tìm kiếm tour..." class="form-control border-0 bg-transparent shadow-none" style="padding: 4px 10px; height: auto; font-size: 13px;" required>
-                                    <button type="button" id="voice-search" class="btn btn-link text-muted p-0 me-2" style="font-size: 14px;"><i class="fa fa-microphone"></i></button>
+                                    <!-- <button type="button" id="voice-search" class="btn btn-link text-muted p-0 me-2" style="font-size: 14px;"><i class="fa fa-microphone"></i></button> -->
                                 </form>
                             </div>
 

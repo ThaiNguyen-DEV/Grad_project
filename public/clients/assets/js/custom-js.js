@@ -331,9 +331,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#update_password_profile").click(function () {
-        $("#card_change_password").toggle();
-    });
+
 
     $(".change_password_profile").on("submit", function (e) {
         e.preventDefault();
@@ -631,64 +629,12 @@ $(document).ready(function () {
         const paymentMethod = $(this).val();
         $("#payment_hidden").val(paymentMethod);
         const isPaymentSelected =
-            paymentMethod === "paypal-payment" ||
-            paymentMethod === "momo-payment";
+            paymentMethod === "zalopay-payment" ||
+            paymentMethod === "momo-payment" ||
+            paymentMethod === "vnpay-payment";
 
         $(".btn-submit-booking").toggle(!isPaymentSelected); // Ẩn hoặc hiện nút xác nhận
-        if (paymentMethod === "paypal-payment") {
-            var totalPricePayment = totalPrice / 25000; //switch to USD
-            paypal
-                .Buttons({
-                    createOrder: function (data, actions) {
-                        return actions.order.create({
-                            purchase_units: [
-                                {
-                                    amount: {
-                                        value: totalPricePayment.toFixed(2), // Số tiền thanh toán
-                                    },
-                                },
-                            ],
-                        });
-                    },
-                    onApprove: function (data, actions) {
-                        return actions.order.capture().then(function (details) {
-                            // Hiển thị thông tin thanh toán thành công
-                            console.log(
-                                "Transaction completed by " +
-                                    details.payer.name.given_name
-                            );
-                            // Tạo input hidden mới
-                            var hiddenInput = $("<input>", {
-                                type: "hidden", // Loại input là hidden
-                                name: "transactionIdPaypal", // Tên của input
-                                value: details.id, // Giá trị là transactionId
-                            });
 
-                            // Thêm input hidden vào form
-                            $('input[name="payment"]:checked')
-                                .closest("form")
-                                .append(hiddenInput);
-                            toastr.success("Thanh toán thành công!");
-                            $("#paypal-button-container").hide(); // Ẩn nút PayPal
-
-                            // Vô hiệu hóa tất cả các radio button
-                            $('input[name="payment"]').prop("disabled", true);
-
-                            $(".btn-submit-booking").show(); // Hiện nút xác nhận
-                        });
-                    },
-                    onError: function (err) {
-                        console.error(err);
-                        toastr.error(
-                            "Có lỗi xảy ra trong quá trình thanh toán."
-                        );
-                    },
-                })
-                .render("#paypal-button-container"); // Render nút PayPal vào thẻ chứa
-        } else {
-            // Nếu không phải là PayPal, ẩn nút chứa button PayPal
-            $("#paypal-button-container").empty(); // Xóa nút PayPal nếu có
-        }
         if (paymentMethod === "momo-payment") {
             $("#btn-momo-payment").show();
         } else {

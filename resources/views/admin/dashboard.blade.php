@@ -123,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6 col-sm-12  ">
                     <div class="x_panel">
@@ -149,19 +149,19 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($toursBooked as $item)
-                                        <tr>
-                                            <th scope="row" class="text-primary">#{{ $item->tourId }}</th>
-                                            <td class="font-weight-bold">{{ $item->title }}</td>
-                                            <td class="text-center"><span class="badge badge-success">{{ $item->booked_quantity }}</span></td>
-                                            <td class="text-center"><span class="badge badge-warning">{{ $item->quantity }}</span></td>
-                                        </tr>
+                                    <tr>
+                                        <th scope="row" class="text-primary">#{{ $item->tourId }}</th>
+                                        <td class="font-weight-bold">{{ $item->title }}</td>
+                                        <td class="text-center"><span class="badge badge-success">{{ $item->booked_quantity }}</span></td>
+                                        <td class="text-center"><span class="badge badge-warning">{{ $item->quantity }}</span></td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-sm-12  ">
                     <div class="x_panel">
                         <div class="x_title">
@@ -186,19 +186,19 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($newBooking as $item)
-                                        <tr>
-                                            <th scope="row">
-                                                <a href="{{ route('admin.booking-detail',['id' => $item->bookingId]) }}" class="text-primary">#{{ $item->bookingId }}</a>
-                                            </th>
-                                            <td>
-                                                <div class="font-weight-bold">{{ $item->fullName }}</div>
-                                                <div class="text-muted" style="font-size: 11px;">{{ Str::limit($item->tour_name, 25) }}</div>
-                                            </td>
-                                            <td class="font-weight-bold text-danger">{{ number_format($item->totalPrice, 0, ',', '.') }} đ</td>
-                                            <td class="text-center">
-                                                <span class="badge badge-warning">Chưa xác nhận</span>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <a href="{{ route('admin.booking-detail',['id' => $item->bookingId]) }}" class="text-primary">#{{ $item->bookingId }}</a>
+                                        </th>
+                                        <td>
+                                            <div class="font-weight-bold">{{ $item->fullName }}</div>
+                                            <div class="text-muted" style="font-size: 11px;">{{ Str::limit($item->tour_name, 25) }}</div>
+                                        </td>
+                                        <td class="font-weight-bold text-danger">{{ number_format($item->totalPrice, 0, ',', '.') }} đ</td>
+                                        <td class="text-center">
+                                            <span class="badge badge-warning">Chưa xác nhận</span>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -225,7 +225,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <canvas id="lineChart" data-revenue-per-month = {{ json_encode($revenue)}}></canvas>
+                            <canvas id="lineChart" data-revenue-per-month={{ json_encode($revenue)}}></canvas>
                         </div>
 
                     </div>

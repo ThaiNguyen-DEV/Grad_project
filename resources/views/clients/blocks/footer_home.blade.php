@@ -4,7 +4,7 @@
         <div class="row align-items-center mb-5 pb-4 border-bottom">
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                 <div class="d-flex align-items-center">
-                    <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo" style="max-height: 60px; margin-right: 20px;">
+                    <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Logo" style="max-height: 150px; margin-right: 20px;">
                     <div>
                         <h4 class="mb-1" style="color: var(--primary-color);">LOTUSMILE - Nâng Tầm Giá Trị Cuộc Sống</h4>
                         <p class="mb-0 text-muted">Hành trình trọn vẹn, trải nghiệm đỉnh cao</p>
@@ -13,10 +13,10 @@
             </div>
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="50" data-aos-duration="1500" data-aos-offset="50">
                 <form class="newsletter-form d-flex align-items-center" action="#" style="max-width: 500px; margin-left: auto;">
-                    <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0"><i class="fas fa-envelope text-muted"></i></span>
-                        <input type="email" class="form-control border-start-0 ps-0" placeholder="Nhập email nhận ưu đãi..." required style="box-shadow: none;">
-                        <button type="submit" class="btn px-4 fw-600" style="background-color: var(--secondary-color); color: white;">Đăng ký</button>
+                    <div class="input-group bg-white rounded-pill overflow-hidden" style="border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <span class="input-group-text bg-transparent border-0 pe-2 ps-4"><i class="fas fa-envelope text-muted"></i></span>
+                        <input type="email" class="form-control border-0 ps-1 shadow-none" placeholder="Nhập email nhận ưu đãi..." required style="background: transparent; min-height: 50px;">
+                        <button type="submit" class="btn px-4 fw-bold rounded-pill m-1" style="background-color: var(--primary-color); color: white; transition: 0.3s;">Đăng ký</button>
                     </div>
                 </form>
             </div>
@@ -82,7 +82,7 @@
                             <h5 class="fw-bold" style="color: var(--heading-color);">Liên hệ</h5>
                         </div>
                         <ul class="list-style-one text-muted">
-                            <li><i class="fal fa-map-marker-alt text-primary"></i> 38 Nguyen Nhan, Cam Le, Da Nang</li>
+                            <li><i class="fal fa-map-marker-alt text-primary"></i>166 Hà Bồng, Hòa Xuân, Đà Nẵng</li>
                             <li><i class="fal fa-envelope text-primary"></i> <a href="mailto:contact@lotusmile.com" class="text-muted">contact@lotusmile.com</a></li>
                             <li><i class="fal fa-phone-alt text-primary"></i> <a href="tel:1900123456" class="text-muted fw-bold" style="color: var(--primary-color) !important;">1900 123 456</a></li>
                         </ul>
@@ -101,7 +101,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-6 text-center mb-3 mb-lg-0">
-                    <p class="text-white mb-0" style="font-size: 14px;">Bản quyền © 2024 LOTUSMILE. Đã đăng ký bản quyền.</p>
+                    <p class="text-white mb-0" style="font-size: 14px;">Bản quyền © 2026 LOTUSMILE. Đã đăng ký bản quyền.</p>
                 </div>
                 <!-- <div class="col-lg-6 text-center text-lg-end">
                     <img src="{{ asset('clients/assets/images/icons/payment-methods.png') }}" alt="Payments" style="max-height: 30px; filter: brightness(0) invert(1);">
@@ -146,11 +146,7 @@
 <script src="{{ asset('clients/assets/js/script.js') }}"></script>
 {{-- jquery-toast  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-{{-- paypal-payment  --}}
-@if(env('PAYPAL_SANDBOX_CLIENT_ID'))
-<script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_SANDBOX_CLIENT_ID') }}"></script>
-@endif<!-- Custom script by Dev dien-->
+<!-- Custom script by Dev dien-->
 <script src="{{ asset('clients/assets/js/custom-js.js') }}"></script>
 <script src="{{ asset('clients/assets/js/jquery.datetimepicker.full.min.js') }}"></script>
 <script>

@@ -8,9 +8,8 @@
             <div class="col-lg-12">
                 <div class="section-title text-center counter-text-wrap mb-40" data-aos="fade-up" data-aos-duration="1500"
                     data-aos-offset="50">
-                    <h2>Khám phá các điểm đến phổ biến</h2>
-                    <p>Website <span class="count-text plus" data-speed="3000" data-stop="34500">0</span> trải nghiệm phổ
-                        biến nhất mà bạn sẽ nhớ</p>
+                    <h2>Khám phá những điểm đến được yêu thích nhất</h2>
+                    <p>Hơn <span class="count-text plus" data-speed="3000" data-stop="20000">0</span> du khách đã lựa chọn và trải nghiệm những hành trình đáng nhớ cùng chúng tôi</p>
                     <ul class="destinations-nav mt-30">
                         <li data-filter="*" class="active">Tất cả</li>
                         <li data-filter=".domain-b">Miền Bắc</li>
@@ -24,10 +23,10 @@
             <div class="row gap-10 destinations-active justify-content-center">
                 @php $count = 0; @endphp
                 @foreach ($tours as $tour)
-                    <div class="col-lg-4 col-md-6 mb-4 item domain-{{ $tour->domain }}">
+                <div class="col-lg-4 col-md-6 mb-4 item domain-{{ $tour->domain }}">
                     <div class="destination-item style-two" data-aos-duration="1500" data-aos-offset="50">
                         <div class="image" style="max-height: 250px">
-                            <a href="#" class="heart"><i class="fas fa-heart"></i></a>
+                            <!-- <a href="#" class="heart"><i class="fas fa-heart"></i></a> -->
                             <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0]) }}"
                                 alt="Destination">
                         </div>
@@ -40,12 +39,12 @@
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-            </div>
-            @php $count++; @endphp
-            @endforeach
+                </div>
+                @php $count++; @endphp
+                @endforeach
 
+            </div>
         </div>
-    </div>
     </div>
 </section>
 <!-- Popular Destinations Area end -->

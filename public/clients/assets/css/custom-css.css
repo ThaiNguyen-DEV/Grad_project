@@ -2,27 +2,52 @@
 .header-vietravel .header-top {
     font-size: 13px;
 }
+
 .header-vietravel .header-top a:hover {
     color: var(--primary-color) !important;
 }
+
 .header-vietravel .header-navigation {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-.header-vietravel .custom-nav-links > li > a {
+
+.header-vietravel .custom-nav-links>li>a {
     position: relative;
     transition: all 0.3s;
 }
-.header-vietravel .custom-nav-links > li:hover > a,
-.header-vietravel .custom-nav-links > li.active > a {
-    background-color: rgba(0, 0, 0, 0.15);
+
+.header-vietravel .custom-nav-links>li>a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
 }
+
+.header-vietravel .custom-nav-links>li:hover>a,
+.header-vietravel .custom-nav-links>li.active>a {
+    background-color: transparent !important;
+    color: var(--primary-color) !important;
+}
+
+.header-vietravel .custom-nav-links>li:hover>a::after,
+.header-vietravel .custom-nav-links>li.active>a::after {
+    width: 80%;
+}
+
 .header-vietravel .user-dropdown-wrap:hover .dropdown-menu {
     display: block;
     margin-top: 0;
 }
+
 .header-vietravel .dropdown-menu {
     transition: all 0.3s;
 }
+
 .header-search-bar input:focus {
     box-shadow: none !important;
     background: transparent !important;
@@ -33,7 +58,8 @@
     .main-menu .navbar-collapse li {
         padding: 10px 15px !important;
     }
-    .main-header.fixed-header .main-menu .navbar-collapse > ul > li {
+
+    .main-header.fixed-header .main-menu .navbar-collapse>ul>li {
         padding-top: 10px !important;
         padding-bottom: 10px !important;
     }
@@ -92,7 +118,10 @@
 }
 
 .dropdown-menu li:hover {
-    background-color: var(--primary-color);
+    background-color: rgba(0,0,0,0.03);
+}
+.dropdown-menu li:hover a {
+    color: var(--primary-color) !important;
 }
 
 /* css tour in page home  */
@@ -183,9 +212,7 @@
 /****************************************
 *              PAGE USER PROFILE        *
 * ***************************************/
-#card_change_password {
-    display: none;
-}
+
 
 /****************************************
 *              PAGE CHECKOUT            *
@@ -348,7 +375,7 @@
     .booking-btn {
         width: 100%;
         padding: 15px;
-        background-color: var(--secondary-color);
+        background-color: var(--primary-color);
         color: white;
         font-weight: 700;
         font-size: 1.1rem;
@@ -455,4 +482,20 @@
     /* Thêm dấu ba chấm vào cuối */
     word-break: break-word;
     /* Đảm bảo từ không bị tràn ra ngoài */
+}
+
+/* Fix nice-select alignment on banner home */
+.nice-select.destination-select {
+    line-height: 50px !important;
+    height: 100% !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.nice-select.destination-select::after {
+    display: none !important;
+}
+
+.nice-select.destination-select .current {
+    font-weight: 500;
 }

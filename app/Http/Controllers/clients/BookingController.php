@@ -8,6 +8,7 @@ use App\Models\clients\Checkout;
 use App\Models\clients\Tours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
 {
@@ -66,11 +67,11 @@ class BookingController extends Controller
             'bookingId' => $bookingId,
             'paymentMethod' => $paymentMethod,
             'amount' => $totalPrice,
-            'paymentStatus' => ($paymentMethod === 'paypal-payment' || $paymentMethod === 'vnpay-payment') ? 'y' : 'n',
+            'paymentStatus' => ($paymentMethod === 'zalopay-payment' || $paymentMethod === 'vnpay-payment') ? 'y' : 'n',
         ];
 
-        if ($paymentMethod === 'paypal-payment') {
-            $dataCheckout['transactionId'] = $req->transactionIdPaypal;
+        if ($paymentMethod === 'zalopay-payment') {
+            $dataCheckout['transactionId'] = $req->transactionIdZaloPay;
         } elseif ($paymentMethod === 'vnpay-payment') {
             $dataCheckout['transactionId'] = $req->transactionIdVNPay;
         }
@@ -305,5 +306,79 @@ class BookingController extends Controller
             return response()->json(['success' => false]);
         }
         return response()->json(['success' => true]);
+    }
+
+    public function createZaloPayPayment(Request $request)
+    {
+        // Lưu dữ liệu form vào session để dùng sau khi callback
+        session()->put('booking_form_data', $request->all());
+        session()->put('tourId', $request->tourId);
+
+        $config = [
+            "app_id" => 554,
+            "key1" => "8NdU5pG5R2spGHGhyO99HN1OhD8IQJBn",
+            "key2" => "uUfsWgfLkRLzq6W2uNXTCxrfxs51auny",
+            "endpoint" => "https://sb-openapi.zalopay.vn/v2/create"
+        ];
+
+        $embeddata = json_encode(['redirecturl' => route('zalopay.callback')]);
+        $item = '[]';
+        $amount = (int)(preg_replace('/[^0-9]/', '', $request->totalPrice));
+
+        $transID = time() . '_' . $request->tourId;
+        $order = [
+            "app_id" => $config["app_id"],
+            "app_time" => round(microtime(true) * 1000),
+            "app_trans_id" => date("ymd") . "_" . $transID,
+            "app_user" => "lotusmile_user",
+            "item" => $item,
+            "embed_data" => $embeddata,
+            "amount" => $amount,
+            "description" => "Thanh toan tour du lich #" . $transID,
+            "bank_code" => "", // "" nghĩa là hiển thị tất cả phương thức trong ZaloPay
+        ];
+
+        // app_id|app_trans_id|app_user|amount|app_time|embed_data|item
+        $data = $order["app_id"] . "|" . $order["app_trans_id"] . "|" . $order["app_user"] . "|" . $order["amount"] . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
+        $order["mac"] = hash_hmac("sha256", $data, $config["key1"]);
+
+        // Gửi POST request dùng Laravel Http Client
+        $response = Http::withoutVerifying()->asForm()->post($config["endpoint"], $order);
+        $result = $response->json();
+
+        if ($result && isset($result['return_code']) && $result['return_code'] == 1) {
+            return response()->json(['payUrl' => $result['order_url']]);
+        } else {
+            Log::error('ZaloPay Error: ' . json_encode($result));
+            return response()->json([
+                'error' => 'Lỗi kết nối ZaloPay',
+                'details' => $result
+            ], 400);
+        }
+    }
+
+    public function handleZaloPayCallback(Request $request)
+    {
+        $tourId = session()->get('tourId');
+        if (!$tourId) {
+            toastr()->error('Không tìm thấy thông tin tour, vui lòng thử lại!');
+            return redirect()->route('home');
+        }
+
+        $tour   = $this->tour->getTourDetail($tourId);
+        $formData = session()->get('booking_form_data');
+
+        // ZaloPay trả về status trên URL (status = 1 là thành công, status = -49 là user huỷ)
+        $status = $request->input('status');
+        $transIdZaloPay = $request->input('apptransid');
+
+        if ($status == 1) {
+            $title = 'Đã thanh toán';
+            return view('clients.booking', compact('title', 'tour', 'transIdZaloPay', 'formData'));
+        } else {
+            $title = 'Thanh toán thất bại';
+            $transIdZaloPay = null;
+            return view('clients.booking', compact('title', 'tour', 'transIdZaloPay', 'formData'));
+        }
     }
 }

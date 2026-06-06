@@ -9,7 +9,7 @@
         align-items: center;
         justify-content: center;
         padding: 50px 15px;
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
 
     .auth-logo {

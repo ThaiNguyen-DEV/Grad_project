@@ -8,18 +8,17 @@
             <div class="col-xl-5 col-lg-6">
                 <div class="mobile-app-content rmb-55" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                     <div class="section-title counter-text-wrap mb-40">
-                        <h2>Ultimate Explorer's Handbook Hướng dẫn đầy đủ của bạn về các chuyến đi</h2>
+                        <h2>Người Bạn Đồng Hành Trên Mọi Hành Trình</h2>
                     </div>
-                    <p>Chúng tôi hợp tác chặt chẽ với khách hàng để hiểu rõ những thách thức và mục tiêu, cung cấp các
-                        giải pháp tùy chỉnh nhằm nâng cao hiệu quả, tăng lợi nhuận và thúc đẩy tăng trưởng bền vững.</p>
+                    <p>Khám phá những kinh nghiệm hữu ích, lịch trình hấp dẫn và bí quyết du lịch được chọn lọc, giúp bạn tự tin lên kế hoạch cho những chuyến đi đáng nhớ.</p>
                     <div class="skillbar mt-80" data-percent="93">
-                        <span class="skillbar-title">Clients Satisfactions</span>
+                        <span class="skillbar-title">Khách Hàng Hài Lòng</span>
                         <div class="progress-bar-striped skillbar-bar progress-bar-animated" role="progressbar"
-                            aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                            aria-valuenow="93" aria-valuemin="0" aria-valuemax="100" style="background-color: var(--primary-color);"></div>
                         <span class="skill-bar-percent"></span>
                     </div>
                     <ul class="list-style-two mt-35 mb-30">
-                        <li>Cơ quan trải nghiệm</li>
+                        <li>Điểm Đến Hấp Dẫn</li>
                         <li>Đội ngũ chuyên nghiệp</li>
                     </ul>
                     <a href="about.html" class="theme-btn style-two">
@@ -60,12 +59,12 @@
             </div>
         </div>
         <div class="row justify-content-center">
-           
+
             <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="team-item hover-content" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide1.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>MINH TOAN</h6>
+                        <h6>NGOC THACH</h6>
                         <span class="designation">Travel Guide</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>
@@ -81,7 +80,7 @@
                     data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide2.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>TRONG HAI</h6>
+                        <h6>NHAT LAM</h6>
                         <span class="designation">Senior Guide</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>
@@ -97,7 +96,7 @@
                     data-aos-duration="1500" data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide3.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>NGOC THU</h6>
+                        <h6>QUANG PHONG</h6>
                         <span class="designation">Travel Guide</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>
@@ -113,7 +112,7 @@
                     data-aos-duration="1500" data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide4.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>DUC ANH</h6>
+                        <h6>HUY HOANG</h6>
                         <span class="designation">Travel Guide</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>
@@ -129,8 +128,8 @@
                     data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide5.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>THANH NHAN</h6>
-                        <span class="designation">Co-founder</span>
+                        <h6>QUANG ANH</h6>
+                        <span class="designation">Travel Guide</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>
                             <a href="https://www.facebook.com/dienne.dev"><i class="fab fa-facebook-f"></i></a>
@@ -145,7 +144,7 @@
                     data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide6.jpg') }}" alt="Guide">
                     <div class="content">
-                        <h6>CONG LAM</h6>
+                        <h6>HA MY</h6>
                         <span class="designation">Senior Guide</span>
                         <div class="social-style-one inner-content">
                             <a href="contact.html"><i class="fab fa-twitter"></i></a>

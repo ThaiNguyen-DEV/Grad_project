@@ -117,7 +117,7 @@
                                     </div>
                                     <img src="{{ asset('clients/assets/images/contact/icon.png') }}" alt="Office Payment" class="mx-3 rounded" style="width: 40px; height: 40px; object-fit: contain;">
                                     <div>
-                                        <h6 class="fw-bold mb-0">Thanh toán tại văn phòng</h6>
+                                        <h6 class="fw-bold mb-0">Thanh toán trực tiếp</h6>
                                         <span class="text-muted" style="font-size: 13px;">Thanh toán trực tiếp tại văn phòng LOTUSMILE</span>
                                     </div>
                                 </div>
@@ -126,14 +126,17 @@
                             <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
                                 <div class="d-flex align-items-center">
                                     <div class="form-check">
-                                        <input class="form-check-input fs-5" type="radio" name="payment" value="paypal-payment" required>
+                                        <input class="form-check-input fs-5" type="radio" name="payment" value="zalopay-payment" required>
                                     </div>
-                                    <img src="{{ asset('clients/assets/images/booking/cong-thanh-toan-paypal.jpg') }}" alt="PayPal" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <img src="{{ asset('clients/assets/images/booking/zalopay-logo.jpg') }}" alt="MoMo" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
                                     <div>
-                                        <h6 class="fw-bold mb-0">Thanh toán bằng PayPal</h6>
-                                        <span class="text-muted" style="font-size: 13px;">Thanh toán an toàn qua cổng PayPal</span>
+                                        <h6 class="fw-bold mb-0">Thanh toán bằng ZaloPay</h6>
+                                        <span class="text-muted" style="font-size: 13px;">Thanh toán qua ví điện tử ZaloPay</span>
                                     </div>
                                 </div>
+                                @if (!empty($transIdZaloPay))
+                                <input type="hidden" name="transactionIdZaloPay" value="{{ $transIdZaloPay }}">
+                                @endif
                             </label>
 
                             <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
@@ -304,7 +307,37 @@
                     }
                 });
             }
-            // office-payment và paypal-payment submit form bình thường
+            if (paymentMethod === 'zalopay-payment') {
+                e.preventDefault();
+
+                var formData = $('.booking-form').serialize();
+
+                console.log('formData:', formData);
+
+                $('.btn-submit-bookingg').prop('disabled', true).text('Đang kết nối ZaloPay...');
+
+                $.ajax({
+                    url: '{{ route("createZaloPayPayment") }}',
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log('ZaloPay response:', response);
+                        if (response.payUrl) {
+                            window.location.href = response.payUrl;
+                        } else {
+                            alert('Không lấy được link thanh toán ZaloPay!');
+                            $('.btn-submit-bookingg').prop('disabled', false).text('Xác Nhận Đặt Tour');
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log('ZaloPay error:', xhr.responseText);
+                        alert('Lỗi kết nối ZaloPay!');
+                        $('.btn-submit-bookingg').prop('disabled', false).text('Xác Nhận Đặt Tour');
+                    }
+                });
+            }
+
+            // office-payment submit form bình thường
         });
 
         // Callback VNPay - khôi phục lại dữ liệu form
@@ -322,6 +355,16 @@
         @if(!empty($transIdVNPay))
         $('input[name="payment"][value="vnpay-payment"]').prop('checked', true);
         $('#payment_hidden').val('vnpay-payment');
+
+        // Remove event listener to allow native form submission
+        $('.booking-form').off('submit');
+        $('.booking-form')[0].submit();
+        @endif
+
+        // Callback ZaloPay thành công → tự động submit form
+        @if(!empty($transIdZaloPay))
+        $('input[name="payment"][value="zalopay-payment"]').prop('checked', true);
+        $('#payment_hidden').val('zalopay-payment');
 
         // Remove event listener to allow native form submission
         $('.booking-form').off('submit');

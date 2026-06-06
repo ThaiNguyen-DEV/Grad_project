@@ -13,7 +13,7 @@
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ asset('clients/assets/images/logos/logo.png') }}" type="image/x-icon">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet">
     <!-- Flaticon -->
     <link rel="stylesheet" href="{{ asset('clients/assets/css/flaticon.min.css') }}">
@@ -95,19 +95,19 @@
                             <nav class="main-menu navbar-expand-lg d-none d-lg-block">
                                 <div class="navbar-collapse collapse clearfix">
                                     <ul class="navigation d-flex m-0 p-0 custom-nav-links align-items-center" style="list-style: none;">
-                                        <li class="{{ Request::url() == route('home') ? 'active' : '' }}"><a href="{{ route('home') }}" class="text-dark px-3 py-2 d-block fw-600 text-decoration-none">TRANG CHỦ</a></li>
+                                        <li class="{{ Request::url() == route('home') ? 'active' : '' }}"><a href="{{ route('home') }}" class="text-dark px-3 py-1 d-block fw-600 text-decoration-none">TRANG CHỦ</a></li>
                                         <li class="dropdown {{ Request::is('tours') || Request::is('team') || Request::is('tour-detail/*') ? 'active' : '' }}">
-                                            <a href="{{ route('tours') }}" class="text-dark px-3 py-2 d-block fw-600 text-decoration-none">TOURS DU LỊCH</a>
+                                            <a href="{{ route('tours') }}" class="text-dark px-3 py-1 d-block fw-600 text-decoration-none">TOURS DU LỊCH</a>
                                             <ul class="dropdown-menu shadow-sm border-0" style="border-radius: 8px;">
                                                 <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Khám phá tất cả Tours</a></li>
-                                                <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Trong Nước</a></li>
-                                                <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Quốc Tế</a></li>
+                                                <!-- <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Trong Nước</a></li>
+                                                <li><a href="{{ route('tours') }}" class="dropdown-item py-2">Tour Quốc Tế</a></li> -->
                                                 <li><a href="{{ route('team') }}" class="dropdown-item py-2">Đội ngũ Hướng Dẫn Viên</a></li>
                                             </ul>
                                         </li>
-                                        <li class="{{ Request::url() == route('destination') ? 'active' : '' }}"><a href="{{ route('destination') }}" class="text-dark px-3 py-2 d-block fw-600 text-decoration-none">ĐIỂM ĐẾN</a></li>
-                                        <li class="{{ Request::url() == route('about') ? 'active' : '' }}"><a href="{{ route('about') }}" class="text-dark px-3 py-2 d-block fw-600 text-decoration-none">GIỚI THIỆU</a></li>
-                                        <li class="{{ Request::url() == route('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}" class="text-dark px-3 py-2 d-block fw-600 text-decoration-none">LIÊN HỆ</a></li>
+                                        <li class="{{ Request::url() == route('destination') ? 'active' : '' }}"><a href="{{ route('destination') }}" class="text-dark px-3 py-1 d-block fw-600 text-decoration-none">ĐIỂM ĐẾN</a></li>
+                                        <li class="{{ Request::url() == route('about') ? 'active' : '' }}"><a href="{{ route('about') }}" class="text-dark px-3 py-1 d-block fw-600 text-decoration-none">GIỚI THIỆU</a></li>
+                                        <li class="{{ Request::url() == route('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}" class="text-dark px-3 py-1 d-block fw-600 text-decoration-none">LIÊN HỆ</a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -119,7 +119,7 @@
                                 <form action="{{ route('search-voice-text') }}" method="GET" class="d-flex align-items-center border rounded-pill overflow-hidden" style="background: #f5f7fa; padding: 2px 4px; width: 280px;">
                                     <i class="fas fa-search text-muted ms-3"></i>
                                     <input type="text" name="keyword" placeholder="Tìm kiếm tour..." class="form-control border-0 bg-transparent shadow-none" style="padding: 6px 12px; height: auto; font-size: 14px;" required>
-                                    <button type="button" id="voice-search" class="btn btn-link text-muted p-0 me-2" style="font-size: 16px;"><i class="fa fa-microphone"></i></button>
+                                    <!-- <button type="button" id="voice-search" class="btn btn-link text-muted p-0 me-2" style="font-size: 16px;"><i class="fa fa-microphone"></i></button> -->
                                 </form>
                             </div>
 
