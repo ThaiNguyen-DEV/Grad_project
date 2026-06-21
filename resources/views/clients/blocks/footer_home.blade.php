@@ -142,19 +142,11 @@
 <script src="{{ asset('clients/assets/js/isotope.pkgd.min.js') }}"></script>
 <!--  AOS Animation -->
 <script src="{{ asset('clients/assets/js/aos.js') }}"></script>
-<!-- Custom script -->
 <script src="{{ asset('clients/assets/js/script.js') }}"></script>
-{{-- jquery-toast  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<!-- Custom script by Dev dien-->
 <script src="{{ asset('clients/assets/js/custom-js.js') }}"></script>
 <script src="{{ asset('clients/assets/js/jquery.datetimepicker.full.min.js') }}"></script>
-<script>
-    window.chtlConfig = {
-        chatbotId: "8852774698"
-    }
-</script>
-<script async data-id="8852774698" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+@include('clients.blocks.chatbot')
 </body>
 
 </html>

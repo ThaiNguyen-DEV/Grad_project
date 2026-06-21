@@ -312,7 +312,7 @@
                 </div>
 
                 <!-- Fake reCAPTCHA for visual matching -->
-                <div class="auth-recaptcha" onclick="this.querySelector('.auth-recaptcha-checkbox').classList.toggle('checked')">
+                <!-- <div class="auth-recaptcha" onclick="this.querySelector('.auth-recaptcha-checkbox').classList.toggle('checked')">
                     <div class="auth-recaptcha-left">
                         <div class="auth-recaptcha-checkbox"></div>
                         <span class="auth-recaptcha-text">I'm not a robot</span>
@@ -321,7 +321,7 @@
                         <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
                         <div>reCAPTCHA</div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="auth-actions">
                     <button type="button" class="auth-btn auth-btn-outline" id="btn-show-signup">Đăng ký ngay</button>

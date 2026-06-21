@@ -115,7 +115,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input fs-5" type="radio" name="payment" value="office-payment" required>
                                     </div>
-                                    <img src="{{ asset('clients/assets/images/contact/icon.png') }}" alt="Office Payment" class="mx-3 rounded" style="width: 40px; height: 40px; object-fit: contain;">
+                                    <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Office Payment" class="mx-3 rounded" style="width: 40px; height: 40px; object-fit: contain;">
                                     <div>
                                         <h6 class="fw-bold mb-0">Thanh toán trực tiếp</h6>
                                         <span class="text-muted" style="font-size: 13px;">Thanh toán trực tiếp tại văn phòng LOTUSMILE</span>

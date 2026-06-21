@@ -37,4 +37,8 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'cohere' => [
+        'api_key' => env('COHERE_API_KEY'),
+    ],
+
 ];

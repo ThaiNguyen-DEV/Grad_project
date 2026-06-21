@@ -24,6 +24,7 @@ use App\Http\Controllers\clients\MyTourController;
 use App\Http\Controllers\clients\PayPalController;
 use App\Http\Controllers\clients\SearchController;
 use App\Http\Controllers\clients\TourBookedController;
+use App\Http\Controllers\Clients\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,9 @@ Route::post('/create-contact', [ContactController::class, 'createContact'])->nam
 //Search 
 Route::get('/search', [SearchController::class, 'index'])->name(name: 'search');
 Route::get('/search-voice-text', [SearchController::class, 'searchTours'])->name('search-voice-text');
+
+//Chatbot API
+Route::post('/api/chatbot/message', [ChatbotController::class, 'handleChat'])->name('chatbot.message');
 
 
 //ADMIN
