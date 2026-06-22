@@ -39,6 +39,18 @@ return [
 
     'cohere' => [
         'api_key' => env('COHERE_API_KEY'),
+        'chat_model' => env('COHERE_CHAT_MODEL', 'command-r-plus-08-2024'),
+        'embed_model' => env('COHERE_EMBED_MODEL', 'embed-multilingual-v3.0'),
+        'ca_bundle' => env('COHERE_CA_BUNDLE', ini_get('curl.cainfo') ?: null),
+        'stream_handler' => env('COHERE_STREAM_HANDLER', PHP_OS_FAMILY === 'Windows'),
+    ],
+
+    'qdrant' => [
+        'url' => env('QDRANT_URL', 'http://127.0.0.1:6333'),
+        'api_key' => env('QDRANT_API_KEY'),
+        'collection' => env('QDRANT_COLLECTION', 'lotusmile_tours'),
+        'vector_size' => (int) env('QDRANT_VECTOR_SIZE', 1024),
+        'enabled' => env('QDRANT_ENABLED', true),
     ],
 
 ];
