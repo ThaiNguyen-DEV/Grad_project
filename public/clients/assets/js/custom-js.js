@@ -458,17 +458,17 @@ $(document).ready(function () {
         // Cập nhật hiển thị số lượng và giá tiền cho từng loại
         $(".quantity__adults").text(numAdults);
         $(".quantity__children").text(numChildren);
-        $(".summary-item:nth-child(1) .total-price").text(
-            adultPrice.toLocaleString() + " VNĐ"
+        $(".subtotal-adults").text(
+            adultsTotal.toLocaleString("vi-VN") + " VNĐ"
         );
-        $(".summary-item:nth-child(2) .total-price").text(
-            childPrice.toLocaleString() + " VNĐ"
+        $(".subtotal-children").text(
+            childrenTotal.toLocaleString("vi-VN") + " VNĐ"
         );
 
         // Tính tổng giá trị
         totalPrice = adultsTotal + childrenTotal - discount;
-        $(".summary-item.total-price span:last").text(
-            totalPrice.toLocaleString() + " VNĐ"
+        $(".total-price-display").html(
+            totalPrice.toLocaleString("vi-VN") + ' <small class="fs-6 text-muted">VNĐ</small>'
         );
 
         $(".totalPrice").val(totalPrice);

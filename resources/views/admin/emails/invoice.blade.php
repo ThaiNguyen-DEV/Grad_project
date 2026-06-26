@@ -12,7 +12,7 @@
             <div class="row" style="margin-bottom: 20px;">
                 <div class="invoice-header">
                     <h3 style="font-size: 20px; font-weight: bold;">
-                        <img src="{{ asset('admin/assets/images/icon/icon_office.png') }}" alt="" style="margin-right: 10px; vertical-align: middle;">
+                        <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="" style="margin-right: 10px; vertical-align: middle;">
                         {{ $invoice_booking->title }}
                         <small style="float: right; font-size: 14px;">Ngày: {{ date('d-m-Y', strtotime($invoice_booking->bookingDate)) }}</small>
                     </h3>
@@ -93,7 +93,7 @@
                     @elseif ($invoice_booking->paymentMethod == 'zalopay-payment')
                     <h1 style="color: blue; font-weight: bold;">Thanh toán tại ZaloPay</h1>
                     @else
-                    <h1 style="color: red; font-weight: bold;">Thanh toán tại văn phòng</h1>
+                    <h1 style="color: red; font-weight: bold;">Thanh toán trực tiếp</h1>
                     @endif
                     <p style="font-size: 14px; color: #555; margin-top: 10px;">Vui lòng hoàn tất thanh toán theo hướng dẫn hoặc liên hệ với chúng tôi nếu cần hỗ trợ.</p>
                 </div>

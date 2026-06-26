@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\ToursModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class ToursManagementController extends Controller
 {
@@ -81,18 +80,20 @@ class ToursManagementController extends Controller
             'message' => 'Tour added successfully!',
             'tourId' => $createTour
         ]);
-
     }
 
     public function addImagesTours(Request $request)
     {
         try {
             $image = $request->file('image');
-            $tourId = $request->tourId;
+            $tourId = $request->input('tourId');
 
-            // Kiểm tra xem file có hợp lệ không
-            if (!$image->isValid()) {
-                return response()->json(['success' => false, 'message' => 'Invalid file upload'], 400);
+            // Kiểm tra file và tourId
+            if (!$image || !$image->isValid()) {
+                return response()->json(['success' => false, 'message' => 'File ảnh không hợp lệ hoặc bị thiếu'], 400);
+            }
+            if (!$tourId) {
+                return response()->json(['success' => false, 'message' => 'Thiếu tourId, vui lòng thử lại'], 400);
             }
 
             // Lấy tên gốc của file (không bao gồm đường dẫn)
@@ -104,12 +105,9 @@ class ToursManagementController extends Controller
             // Tạo tên file mới: [original_name]_[timestamp].[extension]
             $filename = preg_replace('/[^A-Za-z0-9_\-]/', '_', $originalName) . '_' . time() . '.' . $extension;
 
-            // Resize hình ảnh về kích thước 400x350
-            $resizedImage = Image::make($image)->resize(400, 350);
-
-            // Di chuyển file vào thư mục đích
-            $destinationPath = public_path('admin/assets/images/gallery-tours/');
-            $resizedImage->save($destinationPath . $filename); // Lưu ảnh đã resize
+            // Lưu file ảnh vào thư mục đích (không resize để tránh phụ thuộc GD/JPEG)
+            $destinationPath = public_path('admin/assets/images/gallery-tours');
+            $image->move($destinationPath, $filename);
 
             // Tạo dữ liệu để lưu vào cơ sở dữ liệu
             $dataUpload = [
@@ -214,12 +212,16 @@ class ToursManagementController extends Controller
     {
         try {
             $image = $request->file('image');
-            $tourId = $request->tourId;
+            $tourId = $request->input('tourId');
 
-            // Kiểm tra xem file có hợp lệ không
-            if (!$image->isValid()) {
-                return response()->json(['success' => false, 'message' => 'Invalid file upload'], 400);
+            // Kiểm tra file và tourId
+            if (!$image || !$image->isValid()) {
+                return response()->json(['success' => false, 'message' => 'File ảnh không hợp lệ hoặc bị thiếu'], 400);
             }
+            if (!$tourId) {
+                return response()->json(['success' => false, 'message' => 'Thiếu tourId, vui lòng thử lại'], 400);
+            }
+
 
             // Lấy tên gốc của file (không bao gồm đường dẫn)
             $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
@@ -230,12 +232,9 @@ class ToursManagementController extends Controller
             // Tạo tên file mới: [original_name]_[timestamp].[extension]
             $filename = preg_replace('/[^A-Za-z0-9_\-]/', '_', $originalName) . '_' . time() . '.' . $extension;
 
-            // Resize hình ảnh về kích thước 400x350
-            $resizedImage = Image::make($image)->resize(400, 350);
-
-            // Di chuyển file vào thư mục đích
-            $destinationPath = public_path('admin/assets/images/gallery-tours/');
-            $resizedImage->save($destinationPath . $filename); // Lưu ảnh đã resize
+            // Lưu file ảnh vào thư mục đích (không resize để tránh phụ thuộc GD/JPEG)
+            $destinationPath = public_path('admin/assets/images/gallery-tours');
+            $image->move($destinationPath, $filename);
 
             // Tạo dữ liệu để lưu vào cơ sở dữ liệu
             $dataUpload = [
@@ -298,8 +297,8 @@ class ToursManagementController extends Controller
             foreach ($images as $image) {
                 $dataUpload = [
                     'tourId' => $tourId,
-                    'imageURL' => $image, 
-                    'description' => $name  
+                    'imageURL' => $image,
+                    'description' => $name
                 ];
                 $this->tours->uploadImages($dataUpload);
             }
@@ -323,7 +322,6 @@ class ToursManagementController extends Controller
             'success' => true,
             'message' => 'Sửa thành công!',
         ]);
-
     }
 
     public function deleteTour(Request $request)
@@ -346,5 +344,4 @@ class ToursManagementController extends Controller
             ]);
         }
     }
-
 }

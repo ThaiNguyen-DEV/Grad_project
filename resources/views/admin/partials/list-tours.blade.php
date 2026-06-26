@@ -17,6 +17,26 @@
         <td class="align-middle">{{ date('d-m-Y', strtotime($tour->startDate)) }}</td>
         <td class="align-middle">{{ date('d-m-Y', strtotime($tour->endDate)) }}</td>
         <td class="align-middle text-center">
+            @php
+                $today = \Carbon\Carbon::today();
+                $start = \Carbon\Carbon::parse($tour->startDate);
+                $end   = \Carbon\Carbon::parse($tour->endDate);
+            @endphp
+            @if ($today->lt($start))
+                <span class="badge badge-warning" style="font-size: 12px; padding: 5px 10px;">
+                    <i class="fa fa-clock-o mr-1"></i> Sắp diễn ra
+                </span>
+            @elseif ($today->lte($end))
+                <span class="badge badge-success" style="font-size: 12px; padding: 5px 10px;">
+                    <i class="fa fa-play-circle mr-1"></i> Đang diễn ra
+                </span>
+            @else
+                <span class="badge badge-danger" style="font-size: 12px; padding: 5px 10px;">
+                    <i class="fa fa-times-circle mr-1"></i> Đã kết thúc
+                </span>
+            @endif
+        </td>
+        <td class="align-middle text-center">
             <div class="d-flex justify-content-center gap-2">
                 <button type="button" class="btn btn-sm btn-info btn-action-listTours edit-tour" data-toggle="modal" data-target="#edit-tour-modal"
                     data-tourId="{{ $tour->tourId }}" data-urledit="{{ route('admin.tour-edit') }}" title="Sửa tour">

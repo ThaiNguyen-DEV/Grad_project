@@ -27,9 +27,9 @@
                                         <div class="row">
                                             <div class="  invoice-header">
                                                 <h3>
-                                                    <img src="{{ asset('admin/assets/images/icon/icon_office.png') }}"
-                                                        alt=""
-                                                        style="margin-right: 10px">{{ $invoice_booking->title }}
+                                                    <img src="{{ asset('clients/assets/images/logos/logo.png') }}"
+                                                        alt="LOTUSMILE"
+                                                        style="width: 45px; height: 45px; object-fit: contain; margin-right: 10px; border-radius: 6px;">{{ $invoice_booking->title }}
                                                     <small class="pull-right">Ngày:
                                                         {{ date('d-m-Y', strtotime($invoice_booking->bookingDate)) }}</small>
                                                 </h3>
@@ -116,19 +116,18 @@
                                             <!-- accepted payments column -->
                                             <div class="col-md-6">
                                                 <p class="lead">Phương thức thanh toán:</p>
-                                                @if ($invoice_booking->paymentMethod == 'momo-payment')
-                                                    <img src="{{ asset('admin/assets/images/icon/icon_momo.png') }}"
-                                                        class="invoice_payment-method" alt="">
-                                                @elseif ($invoice_booking->paymentMethod == 'paypal-payment')
-                                                    <img src="{{ asset('admin/assets/images/icon/icon_paypal.png') }}"
-                                                        class="icon_payment" alt="PayPal" style="width: 24px;">
+                                                @if ($invoice_booking->paymentMethod == 'vnpay-payment')
+                                                <img src="{{ asset('clients/assets/images/booking/vnpay-logo.jpg') }}"
+                                                    class="invoice_payment-method" alt="VNPay" style="height: 30px; width: auto; object-fit: contain; border-radius: 4px; margin-right: 8px;">
+                                                <span class="badge badge-primary">Thanh toán bằng VNPay</span>
                                                 @elseif ($invoice_booking->paymentMethod == 'zalopay-payment')
-                                                    <img src="https://play-lh.googleusercontent.com/yTofHdJGzXUaX11V8Y-hI8PzNfXhJvW61TntEa78iQ-l9-5zO98GjZ1F4p5H8N9IHg=w240-h240-rw"
-                                                        class="icon_payment" alt="ZaloPay" style="width: 24px;">
+                                                <img src="{{ asset('clients/assets/images/booking/zalopay-logo.jpg') }}"
+                                                    class="icon_payment" alt="ZaloPay" style="height: 30px; width: auto; object-fit: contain; border-radius: 4px; margin-right: 8px;">
+                                                <span class="badge badge-primary">Thanh toán bằng ZaloPay</span>
                                                 @else
-                                                    <img src="{{ asset('admin/assets/images/icon/icon_office.png') }}"
-                                                        alt="">
-                                                    <span class="badge badge-info">Thanh toán tại văn phòng</span>
+                                                <img src="{{ asset('clients/assets/images/logos/logo.png') }}"
+                                                    alt="Office" style="width: 40px; height: 40px; object-fit: contain; margin-right: 8px; border-radius: 6px;">
+                                                <span class="badge badge-info">Thanh toán trực tiếp</span>
                                                 @endif
                                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                                                     Vui lòng hoàn tất thanh toán theo hướng dẫn hoặc liên hệ với chúng
@@ -138,7 +137,8 @@
                                             <!-- /.col -->
                                             <div class="col-md-6">
                                                 <p class="lead">Số tiền phải trả trước
-                                                    {{ date('d-m-Y', strtotime($invoice_booking->startDate)) }}</p>
+                                                    {{ date('d-m-Y', strtotime($invoice_booking->startDate)) }}
+                                                </p>
                                                 <div class="table-responsive">
                                                     <table class="table">
                                                         <tbody>
@@ -177,19 +177,19 @@
                                 <div class=" ">
                                     <button class="btn btn-default" onclick="window.print();"><i
                                             class="fa fa-print"></i> Print</button>
-                                    <button id="send-pdf-btn" data-bookingid= "{{ $invoice_booking->bookingId }}"
+                                    <button id="send-pdf-btn" data-bookingid="{{ $invoice_booking->bookingId }}"
                                         data-email={{ $invoice_booking->email }}
                                         data-urlSendMail={{ route('admin.send.pdf') }}
                                         class="btn btn-primary pull-right" style="margin-right: 5px;"><i
                                             class="fa fa-send"></i> Gửi hóa đơn cho khách hàng</button>
                                     @if ($invoice_booking->bookingStatus == 'b')
-                                        <button class="btn btn-success pull-right confirm-booking"
-                                            data-bookingId="{{ $invoice_booking->bookingId }}"
-                                            data-urlConfirm="{{ route('admin.confirm-booking') }}"><i
-                                                class="fa fa-credit-card"></i> Xác nhận</button>
+                                    <button class="btn btn-success pull-right confirm-booking"
+                                        data-bookingId="{{ $invoice_booking->bookingId }}"
+                                        data-urlConfirm="{{ route('admin.confirm-booking') }}"><i
+                                            class="fa fa-credit-card"></i> Xác nhận</button>
                                     @endif
-                                    <button id="received-money" data-bookingid= "{{ $invoice_booking->bookingId }}"
-                                         data-urlPaid="{{ route('admin.received') }}"
+                                    <button id="received-money" data-bookingid="{{ $invoice_booking->bookingId }}"
+                                        data-urlPaid="{{ route('admin.received') }}"
                                         class="btn btn-info pull-right {{ $hide }}" style="margin-right: 5px;"><i
                                             class="glyphicon glyphicon-usd"></i> Đã thanh toán</button>
                                 </div>

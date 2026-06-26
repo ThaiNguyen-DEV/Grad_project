@@ -4966,15 +4966,15 @@ function init_echarts() {
         var paymentData = $("#echart_donut").data("payment-method");
     
         var paymentMethodNames = {
-            "momo-payment": "Thanh toán bằng Momo",
-            "paypal-payment": "Thanh toán bằng Paypal",
-            "office-payment": "Thanh toán tại văn phòng",
+            "zalopay-payment": "Thanh toán bằng ZaloPay",
+            "vnpay-payment": "Thanh toán bằng VNPay",
+            "office-payment": "Thanh toán trực tiếp",
         };
     
         var paymentMethodColors = {
-            "momo-payment": "#FF0000",  
-            "paypal-payment": "#0000FF", 
-            "office-payment": "#FFA500",
+            "zalopay-payment": "#0068FF", // Blue
+            "vnpay-payment": "#FF0000",   // Red
+            "office-payment": "#FFC107",  // Yellow
         };
     
         // Chuẩn bị dữ liệu cho biểu đồ ECharts

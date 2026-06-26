@@ -88,3 +88,10 @@
 *   `routes/`: Web & API route definitions
 *   `public/`: Compiled assets & entry point
 
+## VNPay card
+```
+9704198526191432198
+NGUYEN VAN A
+07/15
+123456
+```

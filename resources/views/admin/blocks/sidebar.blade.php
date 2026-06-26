@@ -9,13 +9,13 @@
         <div class="clearfix"></div>
 
         <!-- menu profile quick info -->
-        <div class="profile clearfix mt-2 mb-4 px-3">
-            <div class="profile_pic" style="width: 25%; float: left;">
+        <div class="profile mt-2 mb-4 px-3 d-flex align-items-center" style="gap: 12px;">
+            <div class="profile_pic">
                 <img src="{{ asset('admin/assets/images/user-profile/avt_admin.jpg') }}" alt="..."
-                    class="img-circle profile_img" style="border: 2px solid rgba(255,255,255,0.2); width: 45px; height: 45px; margin: 0;">
+                    class="img-circle profile_img" style="border: 2px solid rgba(255,255,255,0.2); width: 45px; height: 45px; margin: 0; object-fit: cover;">
             </div>
-            <div class="profile_info" style="width: 70%; float: left; padding-left: 10px;">
-                <span style="font-size: 12px; color: #cbd5e1;">Xin chào,</span>
+            <div class="profile_info">
+                <span style="font-size: 12px; color: #cbd5e1; display: block; margin-bottom: 2px;">Xin chào,</span>
                 <h2 style="font-size: 15px; font-weight: 600; color: #fff; margin: 0;">Admin</h2>
             </div>
         </div>
@@ -46,7 +46,7 @@
         <!-- /sidebar menu -->
 
         <!-- /menu footer buttons -->
-        <div class="sidebar-footer hidden-small">
+        <!-- <div class="sidebar-footer hidden-small">
             <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
@@ -59,7 +59,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ route('admin.logout') }}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
-        </div>
+        </div> -->
         <!-- /menu footer buttons -->
     </div>
 </div>

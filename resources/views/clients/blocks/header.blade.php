@@ -78,11 +78,11 @@
                                 <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
                             </div>
-                            <div class="language-switcher user-dropdown-wrap dropdown d-inline-block border-start ps-3">
+                            <!-- <div class="language-switcher user-dropdown-wrap dropdown d-inline-block border-start ps-3">
                                 <a href="#" class="text-muted text-decoration-none dropdown-toggle" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-globe me-1"></i> {{ strtoupper(app()->getLocale()) }}
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

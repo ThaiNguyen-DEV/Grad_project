@@ -72,9 +72,9 @@
             </label>
 
             <label class="payment-option">
-                <input type="radio" value="momo-payment" @if ($tour_booked->paymentMethod == 'momo-payment') checked @endif disabled>
+                <input type="radio" value="vnpay-payment" @if ($tour_booked->paymentMethod == 'vnpay-payment') checked @endif disabled>
                 <img src="{{ asset('clients/assets/images/booking/vnpay-logo.jpg') }}" alt="VNPAY">
-                Thanh toán bằng VNPAY
+                Thanh toán bằng VNPay
             </label>
 
         </div>
@@ -112,15 +112,19 @@
                                 VNĐ</span>
                         </div>
                     </div>
-                    <div class="summary-item">
+                    @php
+                    $discount = $tour_booked->numAdults * $tour_booked->priceAdult + $tour_booked->numChildren * $tour_booked->priceChild - $tour_booked->totalPrice;
+                    @endphp
+                    @if ($discount > 0)
+                    <div class="summary-item text-success">
                         <span>Giảm giá:</span>
                         <div>
                             <span class="total-price-booked">
-                                {{ number_format($tour_booked->numAdults * $tour_booked->priceAdult + $tour_booked->numChildren * $tour_booked->priceChild - $tour_booked->totalPrice, 0, ',', '.') }}
-                                VNĐ
+                                -{{ number_format($discount, 0, ',', '.') }} VNĐ
                             </span>
                         </div>
                     </div>
+                    @endif
                     <div class="summary-item total-price-booked">
                         <span>Tổng cộng:</span>
                         <span>{{ number_format($tour_booked->totalPrice, 0, ',', '.') }} VNĐ</span>

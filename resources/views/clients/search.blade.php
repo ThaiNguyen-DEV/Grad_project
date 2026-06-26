@@ -8,6 +8,28 @@
         background-color: var(--primary-color) !important;
         border-color: var(--primary-color) !important;
     }
+
+    /* Fix ảnh đồng nhất kích thước */
+    .destination-item .image {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+        background-color: #f0f0f0;
+    }
+
+    .destination-item .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .destination-item:hover .image img {
+        transform: scale(1.05);
+    }
 </style>
 <section class="tour-grid-page py-100 rel z-2">
     <div class="container">
@@ -20,12 +42,11 @@
                 <div class="destination-item tour-grid style-three bgc-lighter equal-block-fix" data-aos="fade-up"
                     data-aos-duration="1500" data-aos-offset="50">
                     <div class="image">
-                        <!-- <a href="#" class="heart"><i class="fas fa-heart"></i></a> -->
                         @if (count($tour->images) > 0)
                         <img src="{{ asset('admin/assets/images/gallery-tours/' . $tour->images[0]) }}"
-                            alt="Tour List">
+                            alt="{{ $tour->title }}" loading="lazy">
                         @else
-                        <img src="{{ asset('admin/assets/images/no-image.jpg') }}" alt="No Image Available">
+                        <img src="{{ asset('admin/assets/images/no-image.jpg') }}" alt="No Image Available" loading="lazy">
                         @endif
                     </div>
                     <div class="content equal-content-fix">

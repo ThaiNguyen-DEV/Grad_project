@@ -30,7 +30,15 @@ class BookingController extends Controller
         $title = 'Đặt Tour';
         $tour = $this->tour->getTourDetail($id);
         $transIdVNPay = null;
-        return view('clients.booking', compact('title', 'tour', 'transIdVNPay'));
+
+        // Lấy thông tin user đang đăng nhập để tự điền form
+        $userInfo = null;
+        $userId = $this->getUserId();
+        if ($userId) {
+            $userInfo = $this->user->getUser($userId);
+        }
+
+        return view('clients.booking', compact('title', 'tour', 'transIdVNPay', 'userInfo'));
     }
 
     public function createBooking(Request $req)
@@ -46,6 +54,14 @@ class BookingController extends Controller
         $totalPrice = $req->input('totalPrice');
         $tourId = $req->input('tourId');
         $userId = $this->getUserId();
+
+        // Kiểm tra tour đã qua ngày khởi hành chưa
+        $tour = $this->tour->getTourDetail($tourId);
+        if ($tour && \Carbon\Carbon::today()->gt(\Carbon\Carbon::parse($tour->startDate))) {
+            toastr()->error('Tour này đã qua ngày khởi hành, không thể đặt chỗ!');
+            return redirect()->back();
+        }
+
         /**
          * Xử lý booking và checkout
          */

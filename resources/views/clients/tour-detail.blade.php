@@ -211,55 +211,64 @@
 
             <div class="col-lg-4 mt-5 mt-lg-0">
                 <div class="sidebar-sticky" style="position: sticky; top: 120px;">
-                    <div class="widget widget-booking bg-white p-4 rounded-4 shadow-sm mb-4 border-top border-4 border-primary">
-                        <h4 class="fw-bold mb-4 text-center">Đặt Tour Ngay</h4>
+                    @php $isTourExpired = \Carbon\Carbon::today()->gt(\Carbon\Carbon::parse($tourDetail->startDate)); @endphp
+                    <div class="widget widget-booking bg-white p-4 rounded-4 shadow-sm mb-4 border-top border-4 {{ $isTourExpired ? 'border-danger' : 'border-primary' }}">
+                        <h4 class="fw-bold mb-4 text-center">{{ $isTourExpired ? 'Tour đã kết thúc' : 'Đặt Tour Ngay' }}</h4>
                         <div class="price-tag text-center mb-4">
                             <span class="d-block text-muted fs-6 mb-1">Giá chỉ từ</span>
-                            <h3 class="text-primary fw-bold mb-0">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} <span class="fs-6 text-muted fw-normal">VND</span></h3>
+                            <h3 class="{{ $isTourExpired ? 'text-muted' : 'text-primary' }} fw-bold mb-0">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} <span class="fs-6 text-muted fw-normal">VND</span></h3>
                         </div>
 
-                        <form action="{{ route('booking', ['id' => $tourDetail->tourId]) }}" method="POST">
-                            @csrf
-                            <div class="bg-light p-3 rounded-3 mb-4">
-                                <div class="row g-3">
-                                    <div class="col-6 border-end">
-                                        <small class="text-muted d-block fw-bold mb-1">Khởi hành</small>
-                                        <span class="fw-600 text-dark">{{ date('d/m/Y', strtotime($tourDetail->startDate)) }}</span>
-                                        <input type="hidden" name="startdate" value="{{ $tourDetail->startDate }}">
-                                    </div>
-                                    <div class="col-6 pl-3">
-                                        <small class="text-muted d-block fw-bold mb-1">Kết thúc</small>
-                                        <span class="fw-600 text-dark">{{ date('d/m/Y', strtotime($tourDetail->endDate)) }}</span>
-                                        <input type="hidden" name="enddate" value="{{ $tourDetail->endDate }}">
-                                    </div>
+                        <div class="bg-light p-3 rounded-3 mb-4">
+                            <div class="row g-3">
+                                <div class="col-6 border-end">
+                                    <small class="text-muted d-block fw-bold mb-1">Khởi hành</small>
+                                    <span class="fw-600 text-dark">{{ date('d/m/Y', strtotime($tourDetail->startDate)) }}</span>
+                                </div>
+                                <div class="col-6 pl-3">
+                                    <small class="text-muted d-block fw-bold mb-1">Kết thúc</small>
+                                    <span class="fw-600 text-dark">{{ date('d/m/Y', strtotime($tourDetail->endDate)) }}</span>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="time-duration mb-4 text-center">
-                                <span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill fs-6"><i class="fal fa-clock me-2"></i>{{ $tourDetail->time }}</span>
-                                <input type="hidden" name="time" value="{{ $tourDetail->time }}">
+                        <div class="time-duration mb-4 text-center">
+                            <span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill fs-6"><i class="fal fa-clock me-2"></i>{{ $tourDetail->time }}</span>
+                        </div>
+
+                        <div class="ticket-types mb-4">
+                            <h6 class="fw-bold mb-3 border-bottom pb-2">Bảng Giá</h6>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-dark">Người lớn</span>
+                                <span class="fw-bold">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} đ</span>
                             </div>
-
-                            <div class="ticket-types mb-4">
-                                <h6 class="fw-bold mb-3 border-bottom pb-2">Bảng Giá</h6>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <span class="text-dark">Người lớn</span>
-                                    <span class="fw-bold">{{ number_format($tourDetail->priceAdult, 0, ',', '.') }} đ</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-dark">Trẻ em</span>
-                                    <span class="fw-bold">{{ number_format($tourDetail->priceChild, 0, ',', '.') }} đ</span>
-                                </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-dark">Trẻ em</span>
+                                <span class="fw-bold">{{ number_format($tourDetail->priceChild, 0, ',', '.') }} đ</span>
                             </div>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm mb-3 text-uppercase fs-6">
-                                Đặt Chỗ Ngay <i class="fal fa-arrow-right ms-2"></i>
-                            </button>
-
+                        @if ($isTourExpired)
+                            <div class="alert alert-danger text-center rounded-pill py-3 fw-bold mb-3" role="alert">
+                                <i class="fal fa-calendar-times me-2"></i> Tour này đã kết thúc
+                            </div>
                             <div class="text-center">
-                                <a href="{{ route('contact') }}" class="text-muted text-decoration-none" style="font-size: 14px;"><i class="fal fa-info-circle me-1"></i> Cần tư vấn thêm? Liên hệ</a>
+                                <a href="{{ route('contact') }}" class="text-muted text-decoration-none" style="font-size: 14px;"><i class="fal fa-info-circle me-1"></i> Liên hệ để xem tour khác</a>
                             </div>
-                        </form>
+                        @else
+                            <form action="{{ route('booking', ['id' => $tourDetail->tourId]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="startdate" value="{{ $tourDetail->startDate }}">
+                                <input type="hidden" name="enddate" value="{{ $tourDetail->endDate }}">
+                                <input type="hidden" name="time" value="{{ $tourDetail->time }}">
+                                <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow-sm mb-3 text-uppercase fs-6">
+                                    Đặt Chỗ Ngay <i class="fal fa-arrow-right ms-2"></i>
+                                </button>
+                                <div class="text-center">
+                                    <a href="{{ route('contact') }}" class="text-muted text-decoration-none" style="font-size: 14px;"><i class="fal fa-info-circle me-1"></i> Cần tư vấn thêm? Liên hệ</a>
+                                </div>
+                            </form>
+                        @endif
                     </div>
 
                     @if (!empty($tourRecommendations))

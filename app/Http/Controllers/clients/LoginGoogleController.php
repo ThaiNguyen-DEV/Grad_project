@@ -4,6 +4,7 @@ namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\clients\Login;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -16,41 +17,46 @@ class LoginGoogleController extends Controller
         $this->user = new Login();
     }
 
+    private function getSocialiteDriver()
+    {
+        // Tắt SSL verify để fix lỗi cURL error 60 trên môi trường localhost
+        return Socialite::driver('google')->setHttpClient(
+            new Client(['verify' => false])
+        );
+    }
+
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return $this->getSocialiteDriver()->redirect();
     }
 
     public function handleGoogleCallback()
     {
         try {
-            $user = Socialite::driver('google')->stateless()->user();
-            $finduser = $this->user->checkUserExistGoogle($user->id); //Kiểm tra xem thử có id người dùng với email này chưa
-            // dd($finduser);
+            $user = $this->getSocialiteDriver()->stateless()->user();
+            $finduser = $this->user->checkUserExistGoogle($user->id);
+
             if ($finduser) {
                 session()->put('username', $finduser->username);
                 return redirect()->intended('/');
             } else {
                 $data_google = [
                     'google_id' => $user->id,
-                    'fullName' => $user->name,
-                    'username' => 'user-google-' . time(), // Nối thêm timestamp
-                    'password' => md5('12345678'),
-                    'email' => $user->email,
-                    'isActive' => 'y'
+                    'fullName'  => $user->name,
+                    'username'  => 'user-google-' . time(),
+                    'password'  => md5('12345678'),
+                    'email'     => $user->email,
+                    'isActive'  => 'y'
                 ];
                 $newUser = $this->user->registerAcount($data_google);
-                // Kiểm tra xem $newUser có hợp lệ không
                 if ($newUser && isset($newUser->username)) {
-                    // Lưu thông tin người dùng mới vào session
                     session()->put('username', $newUser->username);
                     return redirect()->intended('/');
                 } else {
-                    // Nếu có lỗi khi đăng ký người dùng mới, xử lý lỗi
                     return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình đăng ký người dùng mới');
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
     }

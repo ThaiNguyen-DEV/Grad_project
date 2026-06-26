@@ -34,28 +34,28 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="username" class="fw-bold mb-2">Họ và tên <span class="text-danger">*</span></label>
-                                    <input type="text" id="username" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập Họ và tên" name="fullName" required>
+                                    <input type="text" id="username" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập Họ và tên" name="fullName" value="{{ $userInfo->fullName ?? '' }}" required>
                                     <span class="error-message text-danger" id="usernameError"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="email" class="fw-bold mb-2">Email <span class="text-danger">*</span></label>
-                                    <input type="email" id="email" class="form-control rounded-3 p-3 bg-light border-0" placeholder="sample@gmail.com" name="email" required>
+                                    <input type="email" id="email" class="form-control rounded-3 p-3 bg-light border-0" placeholder="sample@gmail.com" name="email" value="{{ $userInfo->email ?? '' }}" required>
                                     <span class="error-message text-danger" id="emailError"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="tel" class="fw-bold mb-2">Số điện thoại <span class="text-danger">*</span></label>
-                                    <input type="number" id="tel" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập số điện thoại" name="tel" required>
+                                    <input type="number" id="tel" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập số điện thoại" name="tel" value="{{ $userInfo->phoneNumber ?? '' }}" required>
                                     <span class="error-message text-danger" id="telError"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="address" class="fw-bold mb-2">Địa chỉ <span class="text-danger">*</span></label>
-                                    <input type="text" id="address" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập địa chỉ" name="address" required>
+                                    <input type="text" id="address" class="form-control rounded-3 p-3 bg-light border-0" placeholder="Nhập địa chỉ" name="address" value="{{ $userInfo->address ?? '' }}" required>
                                     <span class="error-message text-danger" id="addressError"></span>
                                 </div>
                             </div>
@@ -112,9 +112,7 @@
                         <div class="payment-methods">
                             <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
                                 <div class="d-flex align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input fs-5" type="radio" name="payment" value="office-payment" required>
-                                    </div>
+                                    <input type="radio" name="payment" value="office-payment" required style="transform: scale(1.2); margin-right: 5px;">
                                     <img src="{{ asset('clients/assets/images/logos/logo.png') }}" alt="Office Payment" class="mx-3 rounded" style="width: 40px; height: 40px; object-fit: contain;">
                                     <div>
                                         <h6 class="fw-bold mb-0">Thanh toán trực tiếp</h6>
@@ -125,9 +123,7 @@
 
                             <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
                                 <div class="d-flex align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input fs-5" type="radio" name="payment" value="zalopay-payment" required>
-                                    </div>
+                                    <input type="radio" name="payment" value="zalopay-payment" required style="transform: scale(1.2); margin-right: 5px;">
                                     <img src="{{ asset('clients/assets/images/booking/zalopay-logo.jpg') }}" alt="MoMo" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
                                     <div>
                                         <h6 class="fw-bold mb-0">Thanh toán bằng ZaloPay</h6>
@@ -141,9 +137,7 @@
 
                             <label class="payment-option d-block border rounded-3 p-3 mb-3 cursor-pointer position-relative" style="transition: all 0.3s; cursor: pointer;">
                                 <div class="d-flex align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input fs-5" type="radio" name="payment" value="vnpay-payment" required>
-                                    </div>
+                                    <input type="radio" name="payment" value="vnpay-payment" required style="transform: scale(1.2); margin-right: 5px;">
                                     <img src="{{ asset('clients/assets/images/booking/vnpay-logo.jpg') }}" alt="MoMo" class="mx-3 rounded border" style="width: 40px; height: 40px; object-fit: cover;">
                                     <div>
                                         <h6 class="fw-bold mb-0">Thanh toán bằng VNPay</h6>
@@ -161,8 +155,8 @@
 
                     <!-- Privacy Agreement Section -->
                     <div class="bg-white p-4 rounded-4 shadow-sm mb-4 mb-lg-0 border-start border-4 border-primary">
-                        <div class="form-check d-flex align-items-center">
-                            <input class="form-check-input fs-5 mt-0 me-3" type="checkbox" id="agree" name="agree" required>
+                        <div class="d-flex align-items-center">
+                            <input type="checkbox" id="agree" name="agree" required style="transform: scale(1.2); margin-right: 10px;">
                             <label class="form-check-label text-muted" for="agree">
                                 Tôi đã đọc và đồng ý với <a href="#" target="_blank" class="fw-bold text-primary">Điều khoản thanh toán</a> và quy định của LOTUSMILE.
                             </label>
@@ -204,13 +198,15 @@
                                 <div class="summary-item d-flex justify-content-between mb-2">
                                     <span class="text-muted">Người lớn:</span>
                                     <div class="fw-600">
-                                        <span class="quantity__adults">1</span> x <span class="total-price">{{ number_format($tour->priceAdult, 0, ',', '.') }} VNĐ</span>
+                                        <span class="quantity__adults">1</span> x
+                                        <span class="unit-price-adults">{{ number_format($tour->priceAdult, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                                 <div class="summary-item d-flex justify-content-between mb-2">
                                     <span class="text-muted">Trẻ em:</span>
                                     <div class="fw-600">
-                                        <span class="quantity__children">0</span> x <span class="total-price">0 VNĐ</span>
+                                        <span class="quantity__children">0</span> x
+                                        <span class="unit-price-children">{{ number_format($tour->priceChild, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                                 <div class="summary-item d-flex justify-content-between text-success">
@@ -349,6 +345,7 @@
         $('#address').val(formData.address || '');
         $('#numAdults').val(formData.numAdults || '1');
         $('#numChildren').val(formData.numChildren || '0');
+        $('.totalPrice').val(formData.totalPrice || '{{ $tour->priceAdult }}');
         @endif
 
         // Callback VNPay thành công → tự động submit form
